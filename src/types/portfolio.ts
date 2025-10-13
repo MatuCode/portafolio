@@ -1,15 +1,25 @@
 // src/types/portfolio.ts
+import type { ReactNode } from 'react';
 export type EducationItem = {
-  title: string;       // p.ej., “Ingeniería en Telecomunicaciones”
-  place?: string;      // p.ej., “UTPL”
-  start?: string;      // p.ej., “2018”
-  end?: string;        // p.ej., “2022” o “Actualidad”
+  program: any;
+  country: ReactNode;
+  period: any;
+  status: any;
+  proofUrl: any;
+  institution: any;
+  title: string;
+  place?: string;
+  start?: string;
+  end?: string;
   description?: string;
 };
 
 export type CertItem = {
-  name: string;        // p.ej., “AWS Cloud Practitioner”
-  issuer: string;      // p.ej., “Amazon Web Services”
-  date?: string;       // p.ej., “2024-05”
-  link?: string;       // URL pública del certificado
+  proofUrl: any;
+  name: string;
+  issuer: string;
+  date?: string;
+  link?: string;
+  importance?: number;      // ← añade esto
+  year?: number | string;   // ← y esto
 };
