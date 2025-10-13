@@ -47,7 +47,7 @@ const ContactSection: React.FC = () => {
       {/* CARD visible */}
       <div
         className="
-          relative z-20
+          relative z-[40]
           max-w-xl
           rounded-2xl
           p-8 sm:p-10
@@ -114,7 +114,7 @@ const ContactSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Velo sutil detrás para realzar el card */}
+      {/* Velo sutil detrás para realzar el card (queda por debajo del card) */}
       <div
         aria-hidden="true"
         className="

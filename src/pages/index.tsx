@@ -8,7 +8,7 @@ import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import EducationSection from "@/components/EducationSection";
 import CertificationsSection from "@/components/CertificationsSection";
-import ContactCard from "@/components/ContactSection";      // <- alias
+import ContactCard from "@/components/ContactSection";      // <- usamos alias para evitar choques de nombre
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 /* =========================
@@ -197,7 +197,7 @@ export default function HomePage() {
       case "experiencia": return ExperienceSection;
       case "educacion": return EducationSection;
       case "certificaciones": return CertificationsSection;
-      case "contacto": return ContactCard;          // <- usamos el import (no hay fallback)
+      case "contacto": return ContactCard;   // <- usamos el import (no hay fallback local)
       default: return HomeSection;
     }
   }, [active, projects]);
