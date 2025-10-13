@@ -6,11 +6,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import KnowledgeSection from '@/components/KnowledgeSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import type { EducationItem, CertItem } from '@/types/portfolio';
+import type { ProjectItem } from "@/types/projects";
 
 type Props = {
   projectsI18n?: any; // { title, subtitle?, projects: [{ tech?: string[]; stack?: string[]; ... }] }
   education?: EducationItem[];
   certifications?: CertItem[];
+  projectsES?: ProjectItem[];
   contact?: { email: string; github: string; linkedin: string };
 };
 

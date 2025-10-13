@@ -1,17 +1,18 @@
-/* *Developed by pmatute */
-import type { AppProps } from "next/app";
-import "@/styles/globals.css";
-import SiteBackground from "@/components/SiteBackground";
-import LanguageSwitcher from "@/components/LanguageSwitcher"; // ← aquí
+// src/pages/_app.tsx
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import '../styles/globals.css'; // <-- importa Tailwind (base, components, utilities)
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <SiteBackground />
-      <LanguageSwitcher /> {/* ← botón ES/EN arriba-derecha */}
-      <div className="relative z-10">
-        <Component {...pageProps} />
-      </div>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Portafolio</title>
+      </Head>
+
+      <Component {...pageProps} />
     </>
   );
 }
