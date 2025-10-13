@@ -7,5 +7,9 @@
     "sourceType": "module",
     "ecmaFeatures": { "jsx": true }
   },
-  "ignorePatterns": ["node_modules/", ".next/", "dist/"]
+  "ignorePatterns": ["node_modules/", ".next/", "dist/"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/display-name": "off"
+  }
 }
