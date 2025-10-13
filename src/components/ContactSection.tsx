@@ -1,20 +1,24 @@
 // src/components/ContactSection.tsx
 import React from "react";
+import type { Lang } from "@/i18n/ui";
+import { ui } from "@/i18n/ui";
 
 const EMAIL = "pandresmatute@gmail.com";
 const GITHUB_URL = "https://github.com/Matucode";
 const LINKEDIN_URL = "https://linkedin.com/in/pablo-andres-matute";
 const INSTAGRAM_URL = "https://instagram.com/matute.api.dev";
 
-export default function ContactSection() {
+type Props = { lang: Lang }; // ← recibimos el idioma
+
+export default function ContactSection({ lang }: Props) {
+  const t = ui[lang].contact;
+
   return (
     <section id="contacto" className="relative">
       <div className="mx-auto max-w-6xl px-4 py-24">
         <div className="w-full max-w-xl rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-md">
-          <h2 className="text-4xl font-extrabold text-white">Contacto</h2>
-          <p className="mt-3 text-white/80">
-            Puedes contactarme por correo o por mis redes.
-          </p>
+          <h2 className="text-4xl font-extrabold text-white">{t.title}</h2>
+          <p className="mt-3 text-white/80">{t.desc}</p>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
@@ -22,7 +26,7 @@ export default function ContactSection() {
               className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-5 py-3 font-medium text-white shadow-md transition hover:bg-orange-600"
               title={EMAIL}
             >
-              ✉️ Enviar correo
+              ✉️ {t.email}
             </a>
 
             <a
@@ -32,7 +36,7 @@ export default function ContactSection() {
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
               aria-label="GitHub"
             >
-              <GitHub className="h-5 w-5" /> GitHub
+              <GitHub className="h-5 w-5" /> {t.github}
             </a>
 
             <a
@@ -42,7 +46,7 @@ export default function ContactSection() {
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
               aria-label="LinkedIn"
             >
-              <LinkedIn className="h-5 w-5" /> LinkedIn
+              <LinkedIn className="h-5 w-5" /> {t.linkedin}
             </a>
 
             <a
@@ -52,7 +56,7 @@ export default function ContactSection() {
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
               aria-label="Instagram"
             >
-              <Instagram className="h-5 w-5" /> Instagram
+              <Instagram className="h-5 w-5" /> {t.instagram}
             </a>
           </div>
         </div>
@@ -61,7 +65,7 @@ export default function ContactSection() {
   );
 }
 
-/* ===== Iconos SVG (sin dependencias) ===== */
+/* ===== Iconos SVG ===== */
 function GitHub(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
@@ -79,7 +83,7 @@ function LinkedIn(props: React.SVGProps<SVGSVGElement>) {
 function Instagram(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z" />
+      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z" />
     </svg>
   );
 }
