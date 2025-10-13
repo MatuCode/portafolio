@@ -1,0 +1,41 @@
+{
+  "title": "Portafolio de Pablo",
+  "greeting": "¡Hola! Soy Pablo Andres, desarrollador backend.",
+  "description": "Bienvenido a mi portafolio donde muestro mis proyectos, tecnologías y experiencia.",
+  "skills": {
+    "title": "🛠️ Tecnologías y herramientas",
+    "lenguajes": "Lenguajes de programación",
+    "frameworks": "Frameworks y librerías",
+    "herramientas": "Herramientas y plataformas"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "relatos": {
+      "title": "Relatos de Papel",
+      "description": "Catálogo de libros con búsqueda avanzada y gestión por backend y frontend"
+    },
+    "portfolio": {
+      "title": "Mi Portafolio",
+      "description": "Sitio personal con proyectos, tecnologías, traducción e interfaz dinámica"
+    },
+    "rsale": {
+      "title": "Rsale",
+      "description": "Aplicación web inmobiliaria para gestión de propiedades, backend robusto y despliegue con Docker"
+    }
+  },
+  "contact": {
+    "title": "Contáctame",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "Correo",
+    "emailAddress": "pandresmatute@gmail.com"
+  },
+  "hobbies": {
+    "title": "Pasatiempos",
+    "list": [
+      "Jugar basketball",
+      "Ver anime",
+      "Ir al gym"
+    ]
+  }
+}
