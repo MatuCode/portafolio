@@ -1,7 +1,5 @@
 /* src/components/ContactSection.tsx
- * Componente de Contacto con "glass-card" visible (fondo semitransparente, blur, borde y sombra).
- * i18n simple por locale (ES/EN) igual que tu HomeSection.
- * Enlaces reales: email, LinkedIn, GitHub e Instagram.
+ * Card "glass" visible (bg semitransparente + blur + ring + sombra) con tus enlaces reales.
  */
 
 import React from "react";
@@ -46,7 +44,7 @@ const ContactSection: React.FC = () => {
       "
       aria-label={t.title}
     >
-      {/* CARD (el “cuadro”) */}
+      {/* CARD visible */}
       <div
         className="
           relative z-20
@@ -60,20 +58,16 @@ const ContactSection: React.FC = () => {
         "
       >
         <h2 className="text-4xl font-bold tracking-tight">{t.title}</h2>
-
         <p className="mt-3 text-base/7 text-white/80">{t.subtitle}</p>
 
-        {/* Botones principales */}
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={`mailto:${t.email}`}
             className="
               inline-flex items-center justify-center
-              rounded-xl px-5 py-3
-              font-medium
+              rounded-xl px-5 py-3 font-medium
               bg-orange-500 hover:bg-orange-600
-              transition
-              ring-1 ring-orange-400/20
+              ring-1 ring-orange-400/20 transition
               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400
             "
             aria-label={t.emailAria}
@@ -87,11 +81,9 @@ const ContactSection: React.FC = () => {
             rel="noopener noreferrer"
             className="
               inline-flex items-center justify-center
-              rounded-xl px-5 py-3
-              font-medium
+              rounded-xl px-5 py-3 font-medium
               bg-white/10 hover:bg-white/15
-              transition
-              ring-1 ring-white/20
+              ring-1 ring-white/20 transition
               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/50
             "
           >
@@ -99,7 +91,7 @@ const ContactSection: React.FC = () => {
           </a>
         </div>
 
-        {/* Enlaces secundarios */}
+        {/* Links secundarios */}
         <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/80">
           <a
             href="https://github.com/MatuCode"
@@ -122,12 +114,11 @@ const ContactSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Velo radial sutil por detrás para separar el card del fondo */}
+      {/* Velo sutil detrás para realzar el card */}
       <div
         aria-hidden="true"
         className="
-          pointer-events-none
-          absolute inset-0 z-10
+          pointer-events-none absolute inset-0 z-10
           [mask-image:radial-gradient(60%_60%_at_20%_40%,black,transparent)]
           bg-black/30
         "
