@@ -1,16 +1,23 @@
-﻿/* *Developed by pmatute */
+﻿// src/theme/backgrounds.ts
 import type { CSSProperties } from 'react';
 
-export const DARK_BASE = '#0A0A0E';
-
-export const heroBg: CSSProperties = {
-  backgroundColor: '#000000',
-  backgroundImage:
-    'radial-gradient(1200px 600px at 85% 40%, rgba(249,115,22,0.5), rgba(249,115,22,0.15) 45%, transparent 65%)',
+/**
+ * Estilo compartido para el fondo fijo (negro + degradados cian).
+ * Úsalo con <div style={sharedBackgroundStyle} />
+ */
+export const sharedBackgroundStyle: CSSProperties = {
+  position: 'fixed',
+  inset: 0,
+  zIndex: -1,
+  pointerEvents: 'none',
+  background:
+    'radial-gradient(1200px 600px at 100% -20%, rgba(0,255,255,0.25), transparent 60%), ' +
+    'radial-gradient(1200px 600px at -10% 120%, rgba(0,255,255,0.25), transparent 60%)',
 };
 
-export const sectionGlowTop: CSSProperties = {
-  backgroundColor: '#000000',
-  backgroundImage:
-    'radial-gradient(900px 500px at 50% 10%, rgba(249,115,22,0.4), rgba(249,115,22,0.12) 45%, transparent 70%)',
-};
+/** Helper para componer paths con BASE_PATH si lo usas en Vercel */
+export const withBasePath = (p: string) =>
+  `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${p}`;
+
+// (opcional) export por defecto para que también puedas importar default
+export default sharedBackgroundStyle;

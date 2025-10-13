@@ -1,11 +1,11 @@
 /* *Developed by pmatute */
-import type { ProjectItem } from "@/components/ProjectsSection";
+import type { ProjectItem } from "@/types/projects";
 
 export const projectsES: {
   title: string;
   subtitle?: string;
   cta?: string;
-  projects: ProjectItem[];
+  projects: (ProjectItem & { slug: string; details?: string; imageHD?: string; link?: string })[];
 } = {
   title: "Proyectos",
   subtitle: "Selección de proyectos recientes con enfoque en backend y productos funcionales.",
@@ -21,12 +21,12 @@ export const projectsES: {
       image: "/images/proyectos/futurity.png",
       imageHD: "/images/proyectos/futurity_hd.png",
       tech: [
-        { name: "Java 17", icon: "/icons/tech/java.svg" },
-        { name: "Spring Boot", icon: "/icons/tech/spring.svg" },
-        { name: "MySQL", icon: "/icons/tech/mysql.svg" },
-        { name: "React/Vite", icon: "/icons/tech/react.svg" },
-        { name: "Docker", icon: "/icons/tech/docker.svg" },
-        { name: "REST", icon: "/icons/tech/rest.svg" },
+        "Java 17",
+        "Spring Boot",
+        "MySQL",
+        "React/Vite",
+        "Docker",
+        "REST",
       ],
       link: "https://github.com/MatuCode",
     },
@@ -38,10 +38,10 @@ export const projectsES: {
       image: "/images/proyectos/relatos.png",
       imageHD: "/images/proyectos/relatos_hd.png",
       tech: [
-        { name: "React", icon: "/icons/tech/react.svg" },
-        { name: "Spring Boot", icon: "/icons/tech/spring.svg" },
-        { name: "Elasticsearch", icon: "/icons/tech/elasticsearch.svg" },
-        { name: "REST", icon: "/icons/tech/rest.svg" },
+        "React",
+        "Spring Boot",
+        "Elasticsearch",
+        "REST",
       ],
       link: "https://github.com/MatuCode",
     },
@@ -53,10 +53,10 @@ export const projectsES: {
       image: "/images/proyectos/rsale.png",
       imageHD: "/images/proyectos/rsale_hd.png",
       tech: [
-        { name: "Spring Boot", icon: "/icons/tech/spring.svg" },
-        { name: "MySQL", icon: "/icons/tech/mysql.svg" },
-        { name: "JWT", icon: "/icons/tech/jwt.svg" },
-        { name: "REST", icon: "/icons/tech/rest.svg" },
+        "Spring Boot",
+        "MySQL",
+        "JWT",
+        "REST",
       ],
       link: "https://github.com/MatuCode",
     },

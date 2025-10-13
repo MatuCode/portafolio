@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import KnowledgeSection from '@/components/KnowledgeSection';
 import ProjectsSection from '@/components/ProjectsSection';
-import type { EducationItem, CertItem } from '@/pages/index';
+import type { EducationItem, CertItem } from '@/types/portfolio';
 
 type Props = {
   projectsI18n?: any; // { title, subtitle?, projects: [{ tech?: string[]; stack?: string[]; ... }] }
@@ -131,7 +131,7 @@ export default function TabbedShowcase({
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
             >
-              <ProjectsSection i18n={normalizedProjectsI18n} />
+              <ProjectsSection projects={normalizedProjectsI18n?.projects ?? []} />
             </motion.div>
           )}
 
@@ -215,7 +215,9 @@ export default function TabbedShowcase({
                   <div>
                     <h3 className="text-white font-semibold">{c.name}</h3>
                     <p className="mt-1 text-sm text-white/80">{c.issuer}</p>
-                    {c.year && <p className="mt-1 text-xs text-white/60">{c.year}</p>}
+                    {(typeof c.year === 'string' || typeof c.year === 'number') && (
+                      <p className="mt-1 text-xs text-white/60">{String(c.year)}</p>
+                    )}
                   </div>
                   {c.proofUrl && (
                     <a
