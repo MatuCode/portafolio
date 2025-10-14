@@ -1,5 +1,5 @@
 ﻿/* *Developed by pmatute */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export type Project = {
   id: string;
@@ -15,6 +15,23 @@ export type Project = {
 export default function ProjectsSection({ projects }: { projects: Project[] }) {
   const [open, setOpen] = useState<Project | null>(null);
 
+  // Cierra con ESC y bloquea el scroll del body cuando el modal está abierto
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(null);
+    };
+    document.addEventListener("keydown", onKey);
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+        document.removeEventListener("keydown", onKey);
+      };
+    }
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <section className="py-20 md:py-24">
       {/* contenedor general alineado a la izquierda */}
@@ -26,7 +43,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
               Proyectos
             </h2>
             <p className="text-white/70 text-sm mt-1">
-              Selección de trabajos. Backend en Java/Spring Boot y front en Next.js/React.
+              Selección de trabajos. Full-Stack con Java/Spring Boot y React/Next.js.
             </p>
           </header>
 
@@ -42,12 +59,14 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                   src={p.image}
                   alt={p.title}
                   className="w-full aspect-[16/10] object-cover opacity-95"
+                  loading="lazy"
                 />
 
-                <div className="relative p-3 flex flex-col flex-1 min-h-[140px]">
+                <div className="relative p-3 flex flex-col flex-1 min-h-[160px]">
                   <h3 className="text-white font-semibold text-base leading-snug">
                     {p.title}
                   </h3>
+
                   {p.note && (
                     <p className="text-[11px] text-orange-300/90 mt-0.5">
                       {p.note}
@@ -79,20 +98,25 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                         target="_blank"
                         rel="noreferrer"
                         className="px-2.5 py-1 text-[11px] rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
+                        aria-label={`Abrir demo de ${p.title}`}
                       >
                         Demo
                       </a>
                     )}
+
+                    {/* GitHub solo si existe (si lo quitaste de los datos, no se muestra) */}
                     {p.github && (
                       <a
                         href={p.github}
                         target="_blank"
                         rel="noreferrer"
                         className="px-2.5 py-1 text-[11px] rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
+                        aria-label={`Ver código de ${p.title} en GitHub`}
                       >
                         GitHub
                       </a>
                     )}
+
                     <button
                       type="button"
                       onClick={() => setOpen(p)}
@@ -109,79 +133,95 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
       </div>
 
       {/* Modal detalle */}
-      {open && (
-        <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setOpen(null)}
-          role="dialog"
-          aria-modal="true"
+      {open && <ProjectModal project={open} onClose={() => setOpen(null)} />}
+    </section>
+  );
+}
+
+/* ===== Modal de detalle ===== */
+function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const headingId = `modal-title-${project.id}`;
+  const descId = `modal-desc-${project.id}`;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={headingId}
+      aria-describedby={descId}
+    >
+      <div
+        className="relative w-full max-w-3xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute -top-10 right-0 md:top-0 md:-right-10 p-3 rounded-full bg-white/10 ring-1 ring-white/20 text-white hover:bg-white/20 transition"
+          aria-label="Cerrar"
+          title="Cerrar"
         >
-          <div
-            className="relative w-full max-w-3xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setOpen(null)}
-              className="absolute -top-10 right-0 md:top-0 md:-right-10 p-3 rounded-full bg-white/10 ring-1 ring-white/20 text-white hover:bg-white/20 transition"
-              aria-label="Cerrar"
-              title="Cerrar"
-            >
-              ✕
-            </button>
+          ✕
+        </button>
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={open.image}
-              alt={open.title}
-              className="w-full h-auto rounded-xl ring-1 ring-white/20 bg-black/40"
-            />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-auto rounded-xl ring-1 ring-white/20 bg-black/40"
+        />
 
-            <div className="mt-3 text-white/90">
-              <h3 className="text-lg font-semibold">{open.title}</h3>
-              {open.note && (
-                <p className="text-orange-300/90 text-sm mt-1">{open.note}</p>
-              )}
-              <p className="mt-2 text-white/80 text-sm">{open.description}</p>
+        <div className="mt-3 text-white/90">
+          <h3 id={headingId} className="text-lg font-semibold">
+            {project.title}
+          </h3>
 
-              {!!open.tags?.length && (
-                <div className="mt-3 flex flex-wrap gap-1">
-                  {open.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 text-[10px] rounded-md bg-white/10 ring-1 ring-white/10 text-white/90"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
+          {project.note && (
+            <p className="text-orange-300/90 text-sm mt-1">{project.note}</p>
+          )}
 
-              <div className="mt-4 flex gap-2">
-                {open.demo && (
-                  <a
-                    href={open.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-1.5 text-xs rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
-                  >
-                    Demo
-                  </a>
-                )}
-                {open.github && (
-                  <a
-                    href={open.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-1.5 text-xs rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
-                  >
-                    GitHub
-                  </a>
-                )}
-              </div>
+          <p id={descId} className="mt-2 text-white/80 text-sm">
+            {project.description}
+          </p>
+
+          {!!project.tags?.length && (
+            <div className="mt-3 flex flex-wrap gap-1">
+              {project.tags.map((t) => (
+                <span
+                  key={t}
+                  className="px-2 py-0.5 text-[10px] rounded-md bg-white/10 ring-1 ring-white/10 text-white/90"
+                >
+                  {t}
+                </span>
+              ))}
             </div>
+          )}
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 text-xs rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
+              >
+                Demo
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 text-xs rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
+              >
+                GitHub
+              </a>
+            )}
           </div>
         </div>
-      )}
-    </section>
+      </div>
+    </div>
   );
 }
