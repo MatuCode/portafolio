@@ -1,5 +1,6 @@
 ﻿/* *Developed by pmatute */
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export type Project = {
   id: string;
@@ -7,19 +8,19 @@ export type Project = {
   description: string;
   image: string;      // /public/...
   tags?: string[];
-  github?: string;
   demo?: string;
   note?: string;      // p.ej. "Proyecto para empresa real"
 };
 
 export default function ProjectsSection({ projects }: { projects: Project[] }) {
   const [open, setOpen] = useState<Project | null>(null);
+  const { locale } = useRouter();
+  const isEs = (locale ?? "es").startsWith("es");
+  const seeMore = isEs ? "Ver más" : "Show more";
 
-  // Cierra con ESC y bloquea el scroll del body cuando el modal está abierto
+  // Cerrar con ESC y bloquear scroll al abrir modal
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(null);
-    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
     document.addEventListener("keydown", onKey);
     if (open) {
       const prev = document.body.style.overflow;
@@ -34,20 +35,19 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 
   return (
     <section className="py-20 md:py-24">
-      {/* contenedor general alineado a la izquierda */}
       <div className="w-full pl-6 md:pl-16 lg:pl-28 xl:pl-40 pr-6">
-        {/* contenedor NARROW: ocupa la MITAD izquierda en pantallas grandes */}
         <div className="w-full lg:w-1/2 max-w-[820px]">
           <header className="mb-5">
             <h2 className="text-xl md:text-2xl font-semibold text-white drop-shadow">
-              Proyectos
+              {isEs ? "Proyectos" : "Projects"}
             </h2>
             <p className="text-white/70 text-sm mt-1">
-              Selección de trabajos. Full-Stack con Java/Spring Boot y React/Next.js.
+              {isEs
+                ? "Selección de trabajos. Full-Stack con Java/Spring Boot y React/Next.js."
+                : "Selected work. Full-Stack with Java/Spring Boot and React/Next.js."}
             </p>
           </header>
 
-          {/* 2 columnas (1 en mobile), tarjetas compactas */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
             {projects.map((p) => (
               <article
@@ -68,9 +68,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                   </h3>
 
                   {p.note && (
-                    <p className="text-[11px] text-orange-300/90 mt-0.5">
-                      {p.note}
-                    </p>
+                    <p className="text-[11px] text-orange-300/90 mt-0.5">{p.note}</p>
                   )}
 
                   <p className="text-white/80 text-[13px] mt-1 line-clamp-3">
@@ -90,7 +88,6 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                     </div>
                   )}
 
-                  {/* botones pegados al fondo para alinear entre tarjetas */}
                   <div className="mt-auto pt-2 flex gap-2">
                     {p.demo && (
                       <a
@@ -98,31 +95,17 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                         target="_blank"
                         rel="noreferrer"
                         className="px-2.5 py-1 text-[11px] rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
-                        aria-label={`Abrir demo de ${p.title}`}
+                        aria-label={(isEs ? "Abrir demo de " : "Open demo of ") + p.title}
                       >
                         Demo
                       </a>
                     )}
-
-                    {/* GitHub solo si existe (si lo quitaste de los datos, no se muestra) */}
-                    {p.github && (
-                      <a
-                        href={p.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-2.5 py-1 text-[11px] rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
-                        aria-label={`Ver código de ${p.title} en GitHub`}
-                      >
-                        GitHub
-                      </a>
-                    )}
-
                     <button
                       type="button"
                       onClick={() => setOpen(p)}
                       className="px-2.5 py-1 text-[11px] rounded-lg bg-orange-500/90 text-black hover:brightness-110 transition"
                     >
-                      Ver más
+                      {seeMore}
                     </button>
                   </div>
                 </div>
@@ -132,13 +115,11 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
         </div>
       </div>
 
-      {/* Modal detalle */}
       {open && <ProjectModal project={open} onClose={() => setOpen(null)} />}
     </section>
   );
 }
 
-/* ===== Modal de detalle ===== */
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const headingId = `modal-title-${project.id}`;
   const descId = `modal-desc-${project.id}`;
@@ -209,16 +190,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 Demo
               </a>
             )}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                className="px-3 py-1.5 text-xs rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/20 transition"
-              >
-                GitHub
-              </a>
-            )}
+            {/* GitHub removido en modal también */}
           </div>
         </div>
       </div>

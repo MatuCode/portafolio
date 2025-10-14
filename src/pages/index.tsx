@@ -8,10 +8,12 @@ import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import EducationSection from "@/components/EducationSection";
 import CertificationsSection from "@/components/CertificationsSection";
-import ContactCard from "@/components/ContactSection";      // <- usamos alias para evitar choques de nombre
+import ContactCard from "@/components/ContactSection";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SeoHead from "@/components/SeoHead";
+import ProjectsSchema from "@/components/ProjectsSchema"; // ← NUEVO
+
 import { projectsES } from "@/content/projects.es";
 import { projectsEN } from "@/content/projects.en";
 
@@ -51,7 +53,7 @@ function TabbedShowcase({
   return (
     <nav
       className="fixed left-0 right-0 bottom-2 z-50 flex justify-center px-3"
-      style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }} // iOS safe-area
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }}
     >
       <ul
         className="
@@ -73,8 +75,7 @@ function TabbedShowcase({
                 type="button"
                 onClick={() => onChange(item.key)}
                 className={`px-3.5 py-2 rounded-xl text-sm transition
-                  ${isActive ? "bg-orange-500 text-black"
-                             : "text-white/90 hover:bg-white/10"}`}
+                  ${isActive ? "bg-orange-500 text-black" : "text-white/90 hover:bg-white/10"}`}
               >
                 {item.label}
               </button>
@@ -85,7 +86,6 @@ function TabbedShowcase({
     </nav>
   );
 }
-
 
 /* ============== Animación de cambio de pestaña ============== */
 const FADE = {
@@ -102,26 +102,25 @@ function HomeSection() {
   const lang: "es" | "en" = (router.locale ?? "es").startsWith("es") ? "es" : "en";
 
   const t = {
-  es: {
-    name: "Pablo Andrés Matute",
-    titles: [
-      "Ingeniero en Telecomunicaciones",
-      "Desarrollador Full-Stack (Java/Spring Boot · React/Next.js)"
-    ],
-    blurb:
-      "Creo aplicaciones de extremo a extremo: APIs REST seguras con Spring Boot y bases de datos SQL; y frontends modernos con React/Next.js. Me enfoco en buenas prácticas, testing y despliegues en Vercel/Docker.",
-  },
-  en: {
-    name: "Pablo Andrés Matute",
-    titles: [
-      "Telecommunications Engineer",
-      "Full-Stack Developer (Java/Spring Boot · React/Next.js)"
-    ],
-    blurb:
-      "I build end-to-end apps: secure REST APIs with Spring Boot and SQL databases, and modern front-ends with React/Next.js. I focus on best practices, testing and deployments on Vercel/Docker.",
-  },
-}[lang];
-
+    es: {
+      name: "Pablo Andrés Matute",
+      titles: [
+        "Ingeniero en Telecomunicaciones",
+        "Desarrollador Full-Stack (Java/Spring Boot · React/Next.js)",
+      ],
+      blurb:
+        "Creo aplicaciones de extremo a extremo: APIs REST seguras con Spring Boot y bases de datos SQL; y frontends modernos con React/Next.js. Me enfoco en buenas prácticas, testing y despliegues en Vercel/Docker.",
+    },
+    en: {
+      name: "Pablo Andrés Matute",
+      titles: [
+        "Telecommunications Engineer",
+        "Full-Stack Developer (Java/Spring Boot · React/Next.js)",
+      ],
+      blurb:
+        "I build end-to-end apps: secure REST APIs with Spring Boot and SQL databases, and modern front-ends with React/Next.js. I focus on best practices, testing and deployments on Vercel/Docker.",
+    },
+  }[lang];
 
   return (
     <section className="min-h-screen flex items-center" aria-label="Inicio / Home">
@@ -149,7 +148,6 @@ function HomeSection() {
             >
               Descargar CV (ES)
             </a>
-
             <a
               href="/cv/PabloMatute-CV-EN.pdf"
               download
@@ -181,7 +179,6 @@ function HomeSection() {
 }
 
 /* =========================
-/* =========================
    Página principal
    ========================= */
 export default function HomePage() {
@@ -189,22 +186,60 @@ export default function HomePage() {
   const [active, setActive] = useState<TabKey>("home");
 
   const locale = (router.locale ?? "es").startsWith("es") ? "es" : "en";
+  const projectsLang = locale === "es" ? projectsES : projectsEN;
 
-  const projects = locale === "es" ? projectsES : projectsEN;
-
+  // Normaliza datos para el componente de tarjetas
   const normalizedProjects: Project[] = useMemo(() => {
-    return projects.projects.map((p: any) => ({
-      id: p.slug ?? p.id ?? String(p.title),
-      title: p.title,
-      description: p.details ?? p.description ?? "",
-      image: p.imageHD ?? p.image ?? "",
-      tags: p.tags,
-      github: p.github,
-      demo: p.link ?? p.demo,
-      note: p.note,
-    }));
-  }, [projects]);
+    const list = projectsLang.projects
+      // filtra cualquier “Portfolio” si apareciera
+      .filter((p: any) => {
+        const title = (p.title ?? "").toString().toLowerCase();
+        const slug = (p.slug ?? p.id ?? "").toString().toLowerCase();
+        return !title.includes("portfolio") && !slug.includes("portfolio");
+      })
+      .map((p: any) => ({
+        id: p.slug ?? p.id ?? String(p.title),
+        title: p.title,
+        description: p.details ?? p.description ?? "",
+        image: p.imageHD ?? p.image ?? "",
+        tags: p.tags,
+        demo: p.link ?? p.demo,
+        // github intencionalmente omitido
+      }));
+    return list as Project[];
+  }, [projectsLang]);
 
+  // Datos SEO (ES/EN) para JSON-LD en una sola página
+  const projectsSEO = useMemo(() => {
+    const es = projectsES.projects;
+    const en = projectsEN.projects;
+
+    const getId = (x: any) => (x?.slug ?? x?.id ?? String(x?.title)).toString();
+    const byIdEn = new Map(en.map((x: any) => [getId(x), x]));
+
+    return es
+      .filter((p: any) => {
+        const t = (p.title ?? "").toString().toLowerCase();
+        const s = (p.slug ?? p.id ?? "").toString().toLowerCase();
+        return !t.includes("portfolio") && !s.includes("portfolio");
+      })
+      .map((p: any) => {
+        const id = getId(p);
+        const peer = byIdEn.get(id);
+        return {
+          id,
+          title: p.title,
+          descriptionEs: p.details ?? p.description ?? "",
+          descriptionEn:
+            peer?.details ?? peer?.description ?? p.details ?? p.description ?? "",
+          applicationCategory: "SoftwareApplication",
+          operatingSystem: "Web",
+          keywords: p.tags ?? [],
+        };
+      });
+  }, []);
+
+  // lee ?tab=
   useEffect(() => {
     const tab = router.query.tab;
     if (!tab) {
@@ -212,9 +247,7 @@ export default function HomePage() {
       return;
     }
     const key = Array.isArray(tab) ? tab[0] : tab;
-    if (TABS.some((t) => t.key === key)) {
-      setActive(key as TabKey);
-    }
+    if (TABS.some((t) => t.key === key)) setActive(key as TabKey);
   }, [router.query.tab]);
 
   const onChangeTab = (key: TabKey) => {
@@ -249,10 +282,13 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen text-white font-geist-sans app-bg">
-      {/* Switcher ES/EN fijo */}
       <LanguageSwitcher />
       <ThemeSwitcher />
       <SeoHead />
+
+      {/* JSON-LD con todos los proyectos en una sola página (sin OG) */}
+      <ProjectsSchema baseUrl="https://matucode.lat" projects={projectsSEO as any} />
+
       <AnimatePresence mode="wait">
         <motion.div key={active} initial="initial" animate="animate" exit="exit" variants={FADE}>
           {Section}
