@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 
 type ProjectSEO = {
-  id: string;                    // slug sin espacios, ej: "rsale"
-  title: string;                 // nombre visible
+  id: string;
+  title: string;
   descriptionEs: string;
   descriptionEn: string;
-  applicationCategory?: string;  // ej: "BusinessApplication", "CreativeWork"
-  operatingSystem?: string;      // ej: "Web"
+  applicationCategory?: string;
+  operatingSystem?: string;
   version?: string;
-  datePublished?: string;        // "YYYY-MM-DD"
+  datePublished?: string;
   programmingLanguages?: string[];
   softwareRequirements?: string[];
   keywords?: string[];
@@ -19,7 +19,7 @@ export default function ProjectsSchema({
   baseUrl,
   projects,
 }: {
-  baseUrl: string;       // ej: "https://matucode.lat"
+  baseUrl: string;
   projects: ProjectSEO[];
 }) {
   const { locale } = useRouter();
@@ -40,8 +40,10 @@ export default function ProjectsSchema({
       };
       if (p.version) item.softwareVersion = p.version;
       if (p.datePublished) item.datePublished = p.datePublished;
-      if (p.programmingLanguages?.length) item.programmingLanguage = p.programmingLanguages.join(", ");
-      if (p.softwareRequirements?.length) item.softwareRequirements = p.softwareRequirements.join(", ");
+      if (p.programmingLanguages?.length)
+        item.programmingLanguage = p.programmingLanguages.join(", ");
+      if (p.softwareRequirements?.length)
+        item.softwareRequirements = p.softwareRequirements.join(", ");
       if (p.keywords?.length) item.keywords = p.keywords.join(", ");
       if (p.offers) {
         item.offers = {
@@ -52,19 +54,13 @@ export default function ProjectsSchema({
         };
       }
 
-      return {
-        "@type": "ListItem",
-        position: idx + 1,
-        url,
-        item,
-      };
+      return { "@type": "ListItem", position: idx + 1, url, item };
     }),
   };
 
   return (
     <script
       type="application/ld+json"
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
     />
   );
