@@ -10,6 +10,10 @@ import EducationSection from "@/components/EducationSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import ContactCard from "@/components/ContactSection";      // <- usamos alias para evitar choques de nombre
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import SeoHead from "@/components/SeoHead";
+import { projectsES } from "@/content/projects.es";
+import { projectsEN } from "@/content/projects.en";
 
 /* =========================
    Menú Tabbed (inline)
@@ -45,17 +49,32 @@ function TabbedShowcase({
   onChange: (key: TabKey) => void;
 }) {
   return (
-    <nav className="fixed inset-x-0 bottom-6 z-50 flex justify-center">
-      <ul className="flex gap-2 rounded-2xl bg-black/50 backdrop-blur px-3 py-2 ring-1 ring-white/15">
+    <nav
+      className="fixed left-0 right-0 bottom-2 z-50 flex justify-center px-3"
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }} // iOS safe-area
+    >
+      <ul
+        className="
+          no-scrollbar
+          flex gap-1 items-center
+          max-w-[100vw]
+          overflow-x-auto overflow-y-hidden
+          whitespace-nowrap
+          rounded-2xl bg-black/55 backdrop-blur
+          px-2 py-2 ring-1 ring-white/15
+          snap-x snap-mandatory
+        "
+      >
         {items.map((item) => {
           const isActive = active === item.key;
           return (
-            <li key={item.key}>
+            <li key={item.key} className="snap-center">
               <button
                 type="button"
                 onClick={() => onChange(item.key)}
-                className={`px-4 py-2 rounded-xl text-sm transition
-                  ${isActive ? "bg-orange-500 text-black" : "text-white/90 hover:bg-white/10"}`}
+                className={`px-3.5 py-2 rounded-xl text-sm transition
+                  ${isActive ? "bg-orange-500 text-black"
+                             : "text-white/90 hover:bg-white/10"}`}
               >
                 {item.label}
               </button>
@@ -66,6 +85,7 @@ function TabbedShowcase({
     </nav>
   );
 }
+
 
 /* ============== Animación de cambio de pestaña ============== */
 const FADE = {
@@ -82,19 +102,26 @@ function HomeSection() {
   const lang: "es" | "en" = (router.locale ?? "es").startsWith("es") ? "es" : "en";
 
   const t = {
-    es: {
-      name: "Pablo Andrés Matute",
-      titles: ["Ingeniero en Telecomunicaciones", "Máster en Desarrollo de Software (en proceso)"],
-      blurb:
-        "Aprendiendo a ser desarrollador full-stack: backend con Java / Spring Boot y frontend con React / Next.js, trabajando con bases de datos SQL.",
-    },
-    en: {
-      name: "Pablo Andrés Matute",
-      titles: ["Telecommunications Engineer", "Master's in Software Development (in progress)"],
-      blurb:
-        "Learning to become a full-stack developer: backend with Java / Spring Boot and frontend with React / Next.js, working with SQL databases.",
-    },
-  }[lang];
+  es: {
+    name: "Pablo Andrés Matute",
+    titles: [
+      "Ingeniero en Telecomunicaciones",
+      "Desarrollador Full-Stack (Java/Spring Boot · React/Next.js)"
+    ],
+    blurb:
+      "Creo aplicaciones de extremo a extremo: APIs REST seguras con Spring Boot y bases de datos SQL; y frontends modernos con React/Next.js. Me enfoco en buenas prácticas, testing y despliegues en Vercel/Docker.",
+  },
+  en: {
+    name: "Pablo Andrés Matute",
+    titles: [
+      "Telecommunications Engineer",
+      "Full-Stack Developer (Java/Spring Boot · React/Next.js)"
+    ],
+    blurb:
+      "I build end-to-end apps: secure REST APIs with Spring Boot and SQL databases, and modern front-ends with React/Next.js. I focus on best practices, testing and deployments on Vercel/Docker.",
+  },
+}[lang];
+
 
   return (
     <section className="min-h-screen flex items-center" aria-label="Inicio / Home">
@@ -154,6 +181,7 @@ function HomeSection() {
 }
 
 /* =========================
+/* =========================
    Página principal
    ========================= */
 export default function HomePage() {
@@ -162,54 +190,72 @@ export default function HomePage() {
 
   const locale = (router.locale ?? "es").startsWith("es") ? "es" : "en";
 
-  const projectsES: Project[] = [
-    { id: "rsale", title: "Rsale", description: "Plataforma de ventas y gestión de catálogo. Proyecto desarrollado para una empresa real (entorno productivo).", image: "/projects/rsale.jpg", tags: ["Java", "TypeScript", "SQL", "Spring Boot", "React"], github: "https://github.com/MatuCode", demo: "#" },
-    { id: "futurity", title: "Futurity Inventory", description: "Sistema de inventario y calidad de servicio para un ISP. Proyecto implementado para una empresa real.", image: "/projects/futurity.jpg", tags: ["Java", "TypeScript", "SQL", "Spring Boot", "React"], github: "https://github.com/MatuCode" },
-    { id: "relatos", title: "Relatos de Papel", description: "Trabajo de maestría: plataforma para gestión y venta de libros con búsquedas eficientes.", image: "/projects/relatos.jpg", tags: ["Java", "TypeScript", "SQL", "Spring Boot", "Next.js"], github: "https://github.com/MatuCode", demo: "#" },
-    { id: "portfolio", title: "Portfolio Web", description: "Portafolio personal con animaciones y secciones dinámicas.", image: "/projects/portfolio.jpg", tags: ["TypeScript", "JavaScript", "CSS", "Next.js", "Tailwind", "Framer Motion"], github: "https://github.com/MatuCode", demo: "/" },
-  ];
-
-  const projectsEN: Project[] = [
-    { id: "rsale-en", title: "Rsale", description: "Sales and catalog management platform. Built for a real company (production environment).", image: "/projects/rsale.jpg", tags: ["Java", "TypeScript", "SQL", "Spring Boot", "React"], github: "https://github.com/MatuCode", demo: "#" },
-    { id: "futurity-en", title: "Futurity Inventory", description: "Inventory and service quality system for an ISP. Implemented for a real company.", image: "/projects/futurity.jpg", tags: ["Java", "TypeScript", "SQL", "Spring Boot", "React"], github: "https://github.com/MatuCode" },
-    { id: "relatos-en", title: "Relatos de Papel", description: "Master’s degree project: platform for managing and selling books with efficient search.", image: "/projects/relatos.jpg", tags: ["Java", "TypeScript", "SQL", "Spring Boot", "Next.js"], github: "https://github.com/MatuCode", demo: "#" },
-    { id: "portfolio-en", title: "Portfolio Website", description: "Personal portfolio with smooth animations and dynamic sections.", image: "/projects/portfolio.jpg", tags: ["TypeScript", "JavaScript", "CSS", "Next.js", "Tailwind", "Framer Motion"], github: "https://github.com/MatuCode", demo: "/" },
-  ];
-
   const projects = locale === "es" ? projectsES : projectsEN;
 
+  const normalizedProjects: Project[] = useMemo(() => {
+    return projects.projects.map((p: any) => ({
+      id: p.slug ?? p.id ?? String(p.title),
+      title: p.title,
+      description: p.details ?? p.description ?? "",
+      image: p.imageHD ?? p.image ?? "",
+      tags: p.tags,
+      github: p.github,
+      demo: p.link ?? p.demo,
+      note: p.note,
+    }));
+  }, [projects]);
+
   useEffect(() => {
-    const q = (router.query.tab as string | undefined)?.toLowerCase();
-    const allowed: TabKey[] = ["home","habilidades","proyectos","experiencia","educacion","certificaciones","contacto"];
-    if (q && (allowed as string[]).includes(q)) setActive(q as TabKey);
+    const tab = router.query.tab;
+    if (!tab) {
+      setActive("home");
+      return;
+    }
+    const key = Array.isArray(tab) ? tab[0] : tab;
+    if (TABS.some((t) => t.key === key)) {
+      setActive(key as TabKey);
+    }
   }, [router.query.tab]);
 
   const onChangeTab = (key: TabKey) => {
     setActive(key);
-    router.push({ pathname: "/", query: key === "home" ? {} : { tab: key } }, undefined, { shallow: true });
+    router.push(
+      { pathname: "/", query: key === "home" ? {} : { tab: key } },
+      undefined,
+      { shallow: true }
+    );
   };
 
-  const Section = useMemo(() => {
+  const Section = useMemo<React.ReactNode>(() => {
     switch (active) {
-      case "home": return HomeSection;
-      case "habilidades": return SkillsSection;
-      case "proyectos": return () => <ProjectsSection projects={projects} />;
-      case "experiencia": return ExperienceSection;
-      case "educacion": return EducationSection;
-      case "certificaciones": return CertificationsSection;
-      case "contacto": return ContactCard;   // <- usamos el import (no hay fallback local)
-      default: return HomeSection;
+      case "home":
+        return <HomeSection />;
+      case "habilidades":
+        return <SkillsSection />;
+      case "proyectos":
+        return <ProjectsSection projects={normalizedProjects} />;
+      case "experiencia":
+        return <ExperienceSection />;
+      case "educacion":
+        return <EducationSection />;
+      case "certificaciones":
+        return <CertificationsSection />;
+      case "contacto":
+        return <ContactCard />;
+      default:
+        return <HomeSection />;
     }
-  }, [active, projects]);
+  }, [active, normalizedProjects]);
 
   return (
-    <main className="min-h-screen text-white font-geist-sans bg-transparent">
+    <main className="min-h-screen text-white font-geist-sans app-bg">
       {/* Switcher ES/EN fijo */}
       <LanguageSwitcher />
-
+      <ThemeSwitcher />
+      <SeoHead />
       <AnimatePresence mode="wait">
         <motion.div key={active} initial="initial" animate="animate" exit="exit" variants={FADE}>
-          <Section />
+          {Section}
         </motion.div>
       </AnimatePresence>
 

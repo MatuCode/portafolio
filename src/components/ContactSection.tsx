@@ -37,17 +37,18 @@ const ContactSection: React.FC = () => {
 
   /* === Estilos inline del card/velo (no purgables) === */
   const cardStyle: React.CSSProperties = {
-    position: "relative",
-    zIndex: 40,
-    maxWidth: 720,
-    borderRadius: 18,
-    padding: "2rem",
-    background: "rgba(17,17,17,0.60)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    boxShadow: "0 20px 60px rgba(0,0,0,.6)",
-    border: "1px solid rgba(255,255,255,.20)",
-  };
+  position: "relative",
+  zIndex: 40,
+  maxWidth: 720,
+  borderRadius: "var(--card-radius)",
+  padding: "2rem",
+  background: "var(--card-bg)",
+  backdropFilter: "var(--card-blur)",
+  WebkitBackdropFilter: "var(--card-blur)",
+  boxShadow: "var(--shadow-lg)",
+  border: "1px solid var(--card-border)",
+};
+
 
   const veilStyle: React.CSSProperties = {
     position: "absolute",
@@ -106,7 +107,7 @@ const ContactSection: React.FC = () => {
         </div>
 
         {/* Logos debajo del correo */}
-        <div className="mt-5 flex flex-wrap items-center gap-10">
+        <div className="inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium btn-surface transition">
           {/* LinkedIn */}
           <a
             href="https://linkedin.com/in/pablo-andres-matute"

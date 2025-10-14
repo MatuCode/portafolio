@@ -2,6 +2,7 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/globals.css'; // <-- importa Tailwind (base, components, utilities)
+import ThemeProvider from "@/theme/ThemeProvider";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +13,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <title>Portafolio</title>
       </Head>
 
+      <ThemeProvider>
       <Component {...pageProps} />
+    </ThemeProvider>
     </>
   );
 }
