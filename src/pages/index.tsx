@@ -10,9 +10,8 @@ import EducationSection from "@/components/EducationSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import ContactCard from "@/components/ContactSection";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SeoHead from "@/components/SeoHead";
-import ProjectsSchema from "@/components/ProjectsSchema"; // ← NUEVO
+import ProjectsSchema from "@/components/ProjectsSchema";
 
 import { projectsES } from "@/content/projects.es";
 import { projectsEN } from "@/content/projects.en";
@@ -57,13 +56,9 @@ function TabbedShowcase({
     >
       <ul
         className="
-          no-scrollbar
-          flex gap-1 items-center
-          max-w-[100vw]
-          overflow-x-auto overflow-y-hidden
-          whitespace-nowrap
-          rounded-2xl bg-black/55 backdrop-blur
-          px-2 py-2 ring-1 ring-white/15
+          no-scrollbar flex gap-1 items-center max-w-[100vw]
+          overflow-x-auto overflow-y-hidden whitespace-nowrap
+          rounded-2xl bg-black/55 backdrop-blur px-2 py-2 ring-1 ring-white/15
           snap-x snap-mandatory
         "
       >
@@ -95,7 +90,7 @@ const FADE = {
 };
 
 /* =========================
-   Sección Home (hero)
+   Sección Home (hero) — aspecto original
    ========================= */
 function HomeSection() {
   const router = useRouter();
@@ -123,53 +118,51 @@ function HomeSection() {
   }[lang];
 
   return (
-    <section className="min-h-screen flex items-center hero-surface" aria-label="Inicio / Home">
-      {/* Video de fondo para Neón */}
-      <video className="hero-video" autoPlay muted loop playsInline src="/video/neon-loop.mp4" />
-
-      {/* Retrato al lado derecho */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/hero/portrait.png" alt="Pablo Andrés Matute" className="hero-portrait" />
-
-      <div className="relative w-full max-w-[1200px] pl-6 md:pl-16 lg:pl-28 xl:pl-40 pr-6 z-10">
+    <section className="min-h-screen flex items-center" aria-label="Inicio / Home">
+      <div className="w-full max-w-[1200px] pl-6 md:pl-16 lg:pl-28 xl:pl-40 pr-6">
         <div className="max-w-2xl">
-          {/* Título: en neón se ve con glow animado; en pixel heredará fuente */}
-          <h1 className="neon-text neon-anim font-pixel:text-inherit text-5xl md:text-6xl font-bold leading-tight text-white drop-shadow hero-title">
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-white drop-shadow">
             {t.name}
           </h1>
 
-          <div className="mt-3 space-y-1 text-white/90 font-pixel">
+          <div className="mt-3 space-y-1 text-white/90">
             {t.titles.map((line, i) => (
-              <p key={i} className="text-lg md:text-xl">{line}</p>
+              <p key={i} className="text-lg md:text-xl">
+                {line}
+              </p>
             ))}
           </div>
 
-          <p className="mt-4 text-base md:text-lg text-white/85 font-pixel">
-            {t.blurb}
-          </p>
+          <p className="mt-4 text-base md:text-lg text-white/85">{t.blurb}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/cv/PabloMatute-CV-ES.pdf" download
-              className="pixel-frame rounded-xl bg-orange-500 text-black px-5 py-3 font-medium hover:brightness-110 transition"
+              href="/cv/PabloMatute-CV-ES.pdf"
+              download
+              className="rounded-xl bg-orange-500 text-black px-5 py-3 font-medium hover:brightness-110 transition"
             >
               Descargar CV (ES)
             </a>
             <a
-              href="/cv/PabloMatute-CV-EN.pdf" download
-              className="pixel-frame rounded-xl px-5 py-3 ring-1 ring-white/30 text-white/90 hover:bg-white/10 transition"
+              href="/cv/PabloMatute-CV-EN.pdf"
+              download
+              className="rounded-xl px-5 py-3 ring-1 ring-white/30 text-white/90 hover:bg-white/10 transition"
             >
               Download CV (EN)
             </a>
             <a
-              href="https://github.com/MatuCode" target="_blank" rel="noreferrer"
-              className="pixel-frame rounded-xl px-5 py-3 ring-1 ring-white/30 text-white/90 hover:bg-white/10 transition"
+              href="https://github.com/MatuCode"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl px-5 py-3 ring-1 ring-white/30 text-white/90 hover:bg-white/10 transition"
             >
               GitHub
             </a>
             <a
-              href="https://www.linkedin.com/in/pablo-andres-matute" target="_blank" rel="noreferrer"
-              className="pixel-frame rounded-xl px-5 py-3 ring-1 ring-white/30 text-white/90 hover:bg-white/10 transition"
+              href="https://www.linkedin.com/in/pablo-andres-matute"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-xl px-5 py-3 ring-1 ring-white/30 text-white/90 hover:bg-white/10 transition"
             >
               LinkedIn
             </a>
@@ -190,10 +183,8 @@ export default function HomePage() {
   const locale = (router.locale ?? "es").startsWith("es") ? "es" : "en";
   const projectsLang = locale === "es" ? projectsES : projectsEN;
 
-  // Normaliza datos para el componente de tarjetas
   const normalizedProjects: Project[] = useMemo(() => {
     const list = projectsLang.projects
-      // filtra cualquier “Portfolio” si apareciera
       .filter((p: any) => {
         const title = (p.title ?? "").toString().toLowerCase();
         const slug = (p.slug ?? p.id ?? "").toString().toLowerCase();
@@ -206,16 +197,13 @@ export default function HomePage() {
         image: p.imageHD ?? p.image ?? "",
         tags: p.tags,
         demo: p.link ?? p.demo,
-        // github intencionalmente omitido
       }));
     return list as Project[];
   }, [projectsLang]);
 
-  // Datos SEO (ES/EN) para JSON-LD en una sola página
   const projectsSEO = useMemo(() => {
     const es = projectsES.projects;
     const en = projectsEN.projects;
-
     const getId = (x: any) => (x?.slug ?? x?.id ?? String(x?.title)).toString();
     const byIdEn = new Map(en.map((x: any) => [getId(x), x]));
 
@@ -241,7 +229,6 @@ export default function HomePage() {
       });
   }, []);
 
-  // lee ?tab=
   useEffect(() => {
     const tab = router.query.tab;
     if (!tab) {
@@ -283,12 +270,9 @@ export default function HomePage() {
   }, [active, normalizedProjects]);
 
   return (
-  <main className="min-h-screen text-white font-geist-sans app-bg pixel-scope">
+    <main className="min-h-screen text-white font-geist-sans app-bg">
       <LanguageSwitcher />
-      <ThemeSwitcher />
       <SeoHead />
-
-      {/* JSON-LD con todos los proyectos en una sola página (sin OG) */}
       <ProjectsSchema baseUrl="https://matucode.lat" projects={projectsSEO as any} />
 
       <AnimatePresence mode="wait">
@@ -297,7 +281,6 @@ export default function HomePage() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Menú fijo (píldora) */}
       <TabbedShowcase items={TABS} active={active} onChange={onChangeTab} />
     </main>
   );

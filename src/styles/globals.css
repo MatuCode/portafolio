@@ -123,3 +123,60 @@ body{
 /* Scroll pill del menú en móvil (ya lo tenías) */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* ====== HERO: video y retrato ====== */
+.hero-surface { position: relative; overflow: hidden; }
+.hero-video {
+  display: none; position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: .55;
+}
+.hero-portrait {
+  position: absolute; right: min(4vw, 40px); bottom: 0;
+  height: min(92vh, 720px); max-width: 48vw;
+  object-fit: contain; z-index: 0; opacity: .95; pointer-events: none;
+}
+/* da un poco de brillo según tema */
+[data-theme="dark"]  .hero-portrait { mix-blend-mode: lighten; filter: drop-shadow(0 20px 40px rgba(255,128,0,.25)); }
+[data-theme="neon"]  .hero-portrait { filter: drop-shadow(0 0 24px rgba(0,255,255,.45)); }
+[data-theme="pixel"] .hero-portrait { image-rendering: pixelated; }
+
+/* ====== NEÓN: activa video + contorno y color animado ====== */
+[data-theme="neon"] .hero-video { display: block; }
+[data-theme="neon"] .neon-text {
+  color: #fff;
+  text-shadow:
+    0 0 2px #fff, 0 0 6px #fff,
+    0 0 10px #0ff, 0 0 18px #0ff,
+    0 0 28px #00f5ff, 0 0 38px #00f5ff;
+  filter: saturate(1.2);
+}
+@keyframes hueShift { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
+@keyframes neonPulse {
+  0% { text-shadow: 0 0 4px #fff, 0 0 12px #0ff, 0 0 24px #0ff; }
+  100%{ text-shadow: 0 0 8px #fff, 0 0 24px #0ff, 0 0 48px #0ff; }
+}
+[data-theme="neon"] .neon-anim { animation: neonPulse 2.6s ease-in-out infinite alternate, hueShift 14s linear infinite; }
+
+/* ====== PIXEL: fuente + contornos 8-bit ====== */
+@font-face {
+  font-family: "PressStart2P";
+  src: url("/fonts/PressStart2P-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+[data-theme="pixel"] .font-pixel { font-family: "PressStart2P", ui-monospace, monospace; letter-spacing: .02em; }
+
+/* “marco” pixelado para botones / cards habituales */
+[data-theme="pixel"] .pixel-frame {
+  border-radius: 0; /* esquinas duras */
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #111,
+    0 0 0 6px #fff;
+}
+[data-theme="pixel"] .rounded-xl,
+[data-theme="pixel"] .rounded-2xl { border-radius: 0; } /* quitar curvas */
+[data-theme="pixel"] .pixel-scope .rounded-xl,
+[data-theme="pixel"] .pixel-scope .rounded-2xl,
+[data-theme="pixel"] .pixel-scope .ring-1 { /* heurística */
+  border-radius: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #111, 0 0 0 6px #fff;
+}
