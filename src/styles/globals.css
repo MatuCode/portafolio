@@ -1,182 +1,104 @@
-/* *Developed by pmatute */
+/* ──────────────────────────────────────────────
+   Global Styles  ·  Portafolio Pablo Matute
+   ────────────────────────────────────────────── */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Alturas para que el fondo cubra toda la app */
-html, body, #__next { height: 100%; }
-
-/* Que nada tape tu imagen de fondo */
-body { background: transparent !important; }
-
-/* Evita “saltos” cuando aparece la scrollbar */
-html { scrollbar-gutter: stable both-edges; }
-
-/* Cosas base */
-* { box-sizing: border-box; }
-/* Fondo global - solo AÑADIR */
-body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -9999;                 /* queda detrás de todo */
-  background: url("/pablo-bg.jpg") center / cover no-repeat fixed;
-  pointer-events: none;           /* no bloquea clics */
-}
-/* === Fondo global con tu foto (solo añadir) === */
-body{
-  background: url("/pablo-bg.jpg") center / cover no-repeat fixed !important;
-}
-::selection { background: rgba(255,255,255,.15); color: #fff; }
-/* Oculta scrollbars (solo visual) para contenedores con .no-scrollbar */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-/* === THEMING =================================================== */
+/* ===== Base ===== */
 :root {
-  /* Tokens por defecto (tema oscuro suave) */
-  --bg-gradient: radial-gradient(1200px 800px at 70% 20%, #ff7a18 0%, #2a1d12 45%, #0b0b0f 100%);
-  --text: #ffffff;
-  --muted: rgba(255,255,255,.80);
-
-  --card-bg: rgba(17,17,17,.60);
-  --card-border: rgba(255,255,255,.2);
-  --card-blur: blur(12px);
-  --card-radius: 18px;
-  --shadow-lg: 0 20px 60px rgba(0,0,0,.6);
-
-  --btn-surface: rgba(255,255,255,.08);
-  --btn-border: rgba(255,255,255,.25);
-  --accent: #ff7a18;
-  --accent-strong: #ff8f3a;
-
-  --chip-bg: rgba(255,255,255,.10);
-  --chip-border: rgba(255,255,255,.16);
+  color-scheme: dark;
 }
 
-/* NEÓN (brillos) */
-.theme-neon {
-  --bg-gradient: radial-gradient(900px 600px at 20% 30%, #00f0ff44 0%, #7f00ff33 30%, #050510 100%),
-                 radial-gradient(1200px 900px at 80% 20%, #ff00dd33 0%, transparent 60%);
-  --card-bg: rgba(10,10,25,.55);
-  --card-border: #6ee7ff55;
-  --shadow-lg: 0 30px 80px rgba(0,255,234,.25);
-  --accent: #00e5ff;
-  --accent-strong: #3df3ff;
+html, body, #__next {
+  height: 100%;
 }
 
-/* PIXEL-ART */
-.theme-pixel {
-  --bg-gradient:
-    repeating-linear-gradient(0deg, #0e0e12 0 10px, #151520 10px 20px);
-  --card-bg: rgba(22,22,30,.85);
-  --card-border: #ffffff40;
-  --card-radius: 2px;      /* esquinas cuadradas */
-  --card-blur: none;
-  --shadow-lg: 0 0 0 2px rgba(255,255,255,.06);
-  --accent: #ffd000;       /* dorado retro */
-  --accent-strong: #ffe14a;
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* FUTURISTA (glass) */
-.theme-future {
-  --bg-gradient: linear-gradient(120deg, #0b0f1a 0%, #162238 50%, #0a0f1a 100%);
-  --card-bg: rgba(255,255,255,.08);
-  --card-border: rgba(255,255,255,.28);
-  --card-blur: blur(16px);
-  --card-radius: 22px;
-  --shadow-lg: 0 30px 90px rgba(0,0,0,.45);
-  --accent: #7dd3fc;       /* azul claro */
-  --accent-strong: #bae6fd;
+body {
+  margin: 0;
+  background: #0b0b0b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Utilidades para que no dependas de Tailwind en todo */
-.app-bg { background: var(--bg-gradient); }
-.theme-text { color: var(--text); }
-.theme-muted { color: var(--muted); }
-
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  backdrop-filter: var(--card-blur);
-  -webkit-backdrop-filter: var(--card-blur);
-  border-radius: var(--card-radius);
-  box-shadow: var(--shadow-lg);
+/* Fallback para la clase que usas en <main> */
+.font-geist-sans {
+  font-family: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol");
 }
 
-.btn-surface {
-  background: var(--btn-surface);
-  border: 1px solid var(--btn-border);
-  color: var(--text);
-}
-.btn-accent {
-  background: var(--accent);
-  color: #000;
-}
-.btn-accent:hover { background: var(--accent-strong); }
-
-.chip {
-  background: var(--chip-bg);
-  border: 1px solid var(--chip-border);
-  color: var(--text);
+/* ===== Fondo general del sitio =====
+   Usa /public/pablo-bg.jpg como fondo del layout */
+.app-bg {
+  position: relative;
+  min-height: 100%;
+  background: #0b0b0b url("/pablo-bg.jpg") center right / cover no-repeat fixed;
 }
 
-/* Scroll pill del menú en móvil (ya lo tenías) */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-/* ====== HERO: video y retrato ====== */
-.hero-surface { position: relative; overflow: hidden; }
-.hero-video {
-  display: none; position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: .55;
+/* Vignette / halo suave (opcional) */
+.app-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(800px 520px at 75% 18%, rgba(255,140,0,.50), transparent 60%),
+    radial-gradient(1200px 700px at 50% 100%, rgba(0,0,0,.35), rgba(0,0,0,.75));
 }
-.hero-portrait {
-  position: absolute; right: min(4vw, 40px); bottom: 0;
-  height: min(92vh, 720px); max-width: 48vw;
-  object-fit: contain; z-index: 0; opacity: .95; pointer-events: none;
-}
-/* da un poco de brillo según tema */
-[data-theme="dark"]  .hero-portrait { mix-blend-mode: lighten; filter: drop-shadow(0 20px 40px rgba(255,128,0,.25)); }
-[data-theme="neon"]  .hero-portrait { filter: drop-shadow(0 0 24px rgba(0,255,255,.45)); }
-[data-theme="pixel"] .hero-portrait { image-rendering: pixelated; }
 
-/* ====== NEÓN: activa video + contorno y color animado ====== */
-[data-theme="neon"] .hero-video { display: block; }
-[data-theme="neon"] .neon-text {
+/* Asegura que el contenido viva encima del ::before */
+.app-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* En móviles, evita background-attachment: fixed por performance */
+@media (max-width: 768px) {
+  .app-bg { background-attachment: scroll; }
+}
+
+/* ===== Utilidades ===== */
+
+/* Ocultar scrollbars donde haga falta (menú pill) */
+.no-scrollbar {
+  -ms-overflow-style: none;      /* IE/Edge */
+  scrollbar-width: none;         /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;                 /* Chrome/Safari */
+}
+
+/* Selección de texto */
+::selection {
+  background: rgba(255, 153, 0, 0.35);
   color: #fff;
-  text-shadow:
-    0 0 2px #fff, 0 0 6px #fff,
-    0 0 10px #0ff, 0 0 18px #0ff,
-    0 0 28px #00f5ff, 0 0 38px #00f5ff;
-  filter: saturate(1.2);
 }
-@keyframes hueShift { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
-@keyframes neonPulse {
-  0% { text-shadow: 0 0 4px #fff, 0 0 12px #0ff, 0 0 24px #0ff; }
-  100%{ text-shadow: 0 0 8px #fff, 0 0 24px #0ff, 0 0 48px #0ff; }
-}
-[data-theme="neon"] .neon-anim { animation: neonPulse 2.6s ease-in-out infinite alternate, hueShift 14s linear infinite; }
 
-/* ====== PIXEL: fuente + contornos 8-bit ====== */
-@font-face {
-  font-family: "PressStart2P";
-  src: url("/fonts/PressStart2P-Regular.woff2") format("woff2");
-  font-display: swap;
+/* Imágenes responsive por defecto (cuando no se usa Next/Image) */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
-[data-theme="pixel"] .font-pixel { font-family: "PressStart2P", ui-monospace, monospace; letter-spacing: .02em; }
 
-/* “marco” pixelado para botones / cards habituales */
-[data-theme="pixel"] .pixel-frame {
-  border-radius: 0; /* esquinas duras */
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 4px #111,
-    0 0 0 6px #fff;
+/* Mejor foco accesible para elementos interactivos */
+:focus-visible {
+  outline: 2px solid rgba(255, 153, 0, 0.8);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
-[data-theme="pixel"] .rounded-xl,
-[data-theme="pixel"] .rounded-2xl { border-radius: 0; } /* quitar curvas */
-[data-theme="pixel"] .pixel-scope .rounded-xl,
-[data-theme="pixel"] .pixel-scope .rounded-2xl,
-[data-theme="pixel"] .pixel-scope .ring-1 { /* heurística */
-  border-radius: 0;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #111, 0 0 0 6px #fff;
+
+/* Corrección para <dialog> / overlays si llegas a usarlos */
+@supports (backdrop-filter: blur(4px)) {
+  .backdrop-blur-safe {
+    backdrop-filter: blur(6px);
+  }
 }
