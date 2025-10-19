@@ -1,36 +1,38 @@
-/* src/components/LanguageSwitcher.tsx
- * Botón flotante para cambiar entre ES y EN usando Next Router.
- */
-import React from "react";
 import { useRouter } from "next/router";
 
-type Props = { className?: string };
-
-const LanguageSwitcher: React.FC<Props> = ({ className = "" }) => {
+export default function LanguageSwitcher() {
   const router = useRouter();
-  const current = (router.locale ?? "es").startsWith("es") ? "es" : "en";
-  const next = current === "es" ? "en" : "es";
+  const active = (router.locale ?? "es").startsWith("es") ? "es" : "en";
 
-  const change = () => {
-    router.push(
-      { pathname: router.pathname, query: router.query },
-      undefined,
-      { locale: next, shallow: true }
-    );
+  const go = (locale: "es" | "en") => {
+    router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
+      locale,
+      shallow: true,
+    });
   };
 
   return (
-    <button
-      onClick={change}
-      className={`fixed top-6 right-6 z-[60] rounded-xl px-3 py-2 text-sm
-                 bg-white/10 hover:bg-white/15 text-white ring-1 ring-white/25
-                 backdrop-blur transition ${className}`}
-      aria-label="Change language"
-      title={`Switch to ${next.toUpperCase()}`}
-    >
-      {current.toUpperCase()}
-    </button>
+    <div className="fixed top-4 right-4 z-[60] flex gap-2">
+      <button
+        onClick={() => go("es")}
+        className={`px-3 py-2 rounded-xl ring-1 ring-white/20 backdrop-blur ${
+          active === "es" ? "bg-white/15 text-white" : "bg-black/40 text-white/80 hover:bg-black/50"
+        }`}
+        aria-pressed={active === "es"}
+        title="Español"
+      >
+        ES
+      </button>
+      <button
+        onClick={() => go("en")}
+        className={`px-3 py-2 rounded-xl ring-1 ring-white/20 backdrop-blur ${
+          active === "en" ? "bg-white/15 text-white" : "bg-black/40 text-white/80 hover:bg-black/50"
+        }`}
+        aria-pressed={active === "en"}
+        title="English"
+      >
+        EN
+      </button>
+    </div>
   );
-};
-
-export default LanguageSwitcher;
+}
