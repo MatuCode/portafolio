@@ -1,63 +1,73 @@
 /* *Developed by pmatute */
 import type { ProjectItem } from "@/types/projects";
+
 export const projectsEN: {
   title: string;
   subtitle?: string;
   cta?: string;
-  projects: (ProjectItem & { slug: string; details?: string; imageHD?: string; link?: string })[];
+  projects: (ProjectItem & {
+    slug: string;
+    details?: string;
+    imageHD?: string;
+    link?: string;       // Demo
+    video?: string;      // Optional project video
+    instagram?: string;  // Optional Instagram post/gallery
+    note?: string;       // Visible note (e.g., data protection)
+  })[];
 } = {
   title: "Projects",
-  subtitle: "Selected recent work focused on backend and functional products.",
+  subtitle:
+    "Selected recent work focused on backend, REST APIs, and functional products.",
   cta: "Open",
   projects: [
     {
       slug: "inventario-futurity",
       title: "Futurity — Inventory & Service Quality",
       description:
-        "Internship project: building the web app and database for Inventory and Service Quality modules. Includes RBAC, checklists, PDF/Excel reporting and KPI dashboards.",
+        "Inventory and service-quality management for an ISP: devices, locations, audits, and KPI dashboards.",
       details:
-        "Spring Boot REST endpoints with validation and error handling, MySQL data model and a React/Vite frontend. Authentication, role-based permissions and automated KPI reporting.",
-      image: "/images/proyectos/futurity.png",
-      imageHD: "/images/proyectos/futurity_hd.png",
-      tech: [
-        "Java 17",
-        "Spring Boot",
-        "MySQL",
-        "React/Vite",
-        "Docker",
-        "REST",
-      ],
-      link: "https://github.com/MatuCode",
+        "Web application oriented to network operations. Register and locate devices (routers, ONUs, radios), run audits with checklists, keep full movement traceability, and generate service KPIs with PDF/Excel exports. "
+        + "The backend provides REST endpoints in Spring Boot (Java 17) with validation, error handling, and role-based access control (RBAC). The MySQL schema includes indexes/relations for efficient queries. "
+        + "The frontend, built with React/Next.js, implements validated forms, protected routes, and KPI dashboards. Deployments with Docker and environment configuration.",
+      note: "Data has been modified to protect the company.",
+      image: "/projects/futurity.jpg",
+      imageHD: "/projects/futurity.jpg",
+      tech: ["Java 17", "Spring Boot", "MySQL", "React/Next.js", "Docker", "REST"],
+      link: "#",
+      video: "#",
+      instagram: "https://instagram.com/matute.api.dev",
     },
     {
       slug: "relatos-de-papel",
       title: "Relatos de Papel",
       description:
-        "Books catalog: React (frontend) + Spring Boot with Elasticsearch (backend). Advanced search, filters and pagination.",
-      image: "/images/proyectos/relatos.png",
-      imageHD: "/images/proyectos/relatos_hd.png",
-      tech: [
-        "React",
-        "Spring Boot",
-        "Elasticsearch",
-        "REST",
-      ],
-      link: "https://github.com/MatuCode",
+        "Book management & e-commerce platform with efficient search, faceted filters, and an editorial admin panel.",
+      details:
+        "Master’s project aimed at an editorial e-commerce workflow. Catalog with filters by author/topic/publisher, efficient search, pagination, and a cart with a simulated checkout. "
+        + "The private area handles CRUD for books/authors/stock plus basic sales analytics. "
+        + "Spring Boot backend with DTOs, validation, and JPA mapping; Next.js frontend with SSR, i18n, and reusable components.",
+      image: "/projects/relatos.jpg",
+      imageHD: "/projects/relatos.jpg",
+      tech: ["Java", "Spring Boot", "SQL", "Next.js", "React", "REST"],
+      link: "#",
+      video: "#",
+      instagram: "https://instagram.com/matute.api.dev",
     },
     {
       slug: "rsale-backend",
-      title: "Rsale Backend",
+      title: "Rsale",
       description:
-        "REST services for a real-estate platform: authentication, image handling and property CRUD.",
-      image: "/images/proyectos/rsale.png",
-      imageHD: "/images/proyectos/rsale_hd.png",
-      tech: [
-        "Spring Boot",
-        "MySQL",
-        "JWT",
-        "REST",
-      ],
-      link: "https://github.com/MatuCode",
+        "Sales & catalog platform with stock control, variants, pricing, and reporting for real-world operation.",
+      details:
+        "End-to-end solution to manage products, variants, and inventory; order flows, role-based access, and operational reports. "
+        + "The backend exposes secure REST APIs with Spring Boot (authentication/JWT, validation, pagination, filtering) and persists to SQL with optimized queries. "
+        + "The React/Next.js frontend provides a responsive UI and validated forms. Automated deployments and per-environment configuration.",
+      image: "/projects/rsale.jpg",
+      imageHD: "/projects/rsale.jpg",
+      tech: ["Java", "Spring Boot", "SQL", "Next.js", "React", "REST"],
+      link: "#",
+      video: "#",
+      instagram: "https://instagram.com/matute.api.dev",
     },
   ],
 };
