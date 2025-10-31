@@ -108,12 +108,12 @@ function PdfImageViewer({
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentLoadError}
             loading={
-              <div className="flex items-center justify-center min-h-[600px]">
+              <div className="flex items-center justify-center min-h-[600px]" aria-label={alt}>
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-400"></div>
               </div>
             }
             error={
-              <div className="flex items-center justify-center min-h-[600px] text-gray-600">
+              <div className="flex items-center justify-center min-h-[600px] text-gray-600" aria-label={alt}>
                 <p>{errorText}</p>
               </div>
             }

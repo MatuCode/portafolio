@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { dictionaries } from "@/i18n";
 
 export default function LanguageSwitcher() {
   const router = useRouter();

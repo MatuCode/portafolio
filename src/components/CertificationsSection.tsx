@@ -473,7 +473,7 @@ export default function Certifications() {
 
   // Filter and sort
   const filteredAndSorted = useMemo(() => {
-    let filtered = CERTS.filter(cert => {
+    const filtered = CERTS.filter(cert => {
       const matchesSearch = cert.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            cert.issuer.toLowerCase().includes(searchTerm.toLowerCase());
       
