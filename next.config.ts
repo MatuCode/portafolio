@@ -5,7 +5,8 @@ const nextConfig = {
     locales: ["es", "en"],
     defaultLocale: "es",
   },
-  webpack: (config) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  webpack: (config: any) => {
     config.resolve.alias.canvas = false;
     return config;
   },
