@@ -191,11 +191,11 @@ export default function HomePage() {
   const dictionary = getDictionary(locale);
   const tabItems = TAB_ORDER.map((key) => ({ key, label: dictionary.menu[key] }));
 
-  const projectsCopy: ProjectsCopy = dictionary.projects;
+  const projectsCopy: ProjectsCopy = dictionary.projects as ProjectsCopy;
 
   const projectsSEO = useMemo<ProjectSEO[]>(() => {
-    const esProjects = dictionaries.es.projects.items;
-    const enProjects = dictionaries.en.projects.items;
+    const esProjects = dictionaries.es.projects.items as ProjectsCopy['items'];
+    const enProjects = dictionaries.en.projects.items as ProjectsCopy['items'];
     const enMap = new Map(enProjects.map((item) => [item.slug, item]));
 
     return esProjects.map((item) => {
