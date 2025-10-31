@@ -192,13 +192,13 @@ export default function HomePage() {
   const tabItems = TAB_ORDER.map((key) => ({ key, label: dictionary.menu[key] }));
 
   // Mapear projects con tipos correctos
-  const projectsCopy: ProjectsCopy = {
+  const projectsCopy: ProjectsCopy = useMemo(() => ({
     ...dictionary.projects,
     items: dictionary.projects.items.map((item) => ({
       ...item,
       contextType: item.contextType as "academic" | "internship" | "professional" | undefined,
     })),
-  };
+  }), [dictionary.projects]);
 
   const projectsSEO = useMemo<ProjectSEO[]>(() => {
     const esProjects = dictionaries.es.projects.items.map((item) => ({
@@ -257,7 +257,7 @@ export default function HomePage() {
       case "educacion":
         return <EducationSection copy={dictionary.education} />;
       case "certificaciones":
-        return <CertificationsSection copy={dictionary.certs} />;
+        return <CertificationsSection />;
       case "contacto":
         return <ContactSection copy={dictionary.contact} />;
       default:
