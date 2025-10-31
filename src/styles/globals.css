@@ -106,9 +106,15 @@ body.modal-open nav {
     background-attachment: scroll; 
   }
   
-  /* Ajustar tamaño de la foto en tablets */
+  /* Ajustar tamaño de la foto en tablets y ponerla detrás del contenido */
   .app-bg::after {
     width: 350px;
+    z-index: 0;
+  }
+  
+  /* Asegurar que el contenido esté encima de la foto en tablets */
+  .app-bg > *:not([class*="fixed"]) {
+    z-index: 2;
   }
 }
 
@@ -117,9 +123,17 @@ body.modal-open nav {
     background-position: center center;
   }
   
-  /* Ajustar tamaño de la foto en móviles */
+  /* Ajustar tamaño de la foto en móviles y asegurar que esté detrás del contenido */
   .app-bg::after {
     width: 280px;
+    z-index: 0;
+    opacity: 0.6;
+  }
+  
+  /* Asegurar que el contenido esté encima de la foto en móviles */
+  .app-bg > *:not([class*="fixed"]) {
+    z-index: 2;
+    position: relative;
   }
 }
 
