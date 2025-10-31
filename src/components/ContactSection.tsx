@@ -1,163 +1,289 @@
-/* src/components/ContactSection.tsx
- * Card de Contacto:
- * - Fondo glass (estilos inline para evitar purga)
- * - Botón "Send email", debajo el correo
- * - Debajo: logos (SVG inline) de LinkedIn, GitHub, Instagram
- */
+import React, { useState } from "react";
 
-import React from "react";
-import { useRouter } from "next/router";
-
-const ContactSection: React.FC = () => {
-  const { locale } = useRouter();
-  const lang: "es" | "en" = (locale ?? "es").startsWith("es") ? "es" : "en";
-
-  const t = {
-    es: {
-      title: "Contacto",
-      subtitle: "Puedes contactarme por correo o LinkedIn.",
-      emailBtn: "Enviar correo",
-      emailAria: "Enviar correo a Pablo Andrés Matute",
-      email: "pandresmatute@gmail.com",
-      linkedInLabel: "LinkedIn",
-      gitHubLabel: "GitHub",
-      igLabel: "Instagram",
-    },
-    en: {
-      title: "Contact",
-      subtitle: "You can reach me by email or LinkedIn.",
-      emailBtn: "Send email",
-      emailAria: "Send an email to Pablo Andrés Matute",
-      email: "pandresmatute@gmail.com",
-      linkedInLabel: "LinkedIn",
-      gitHubLabel: "GitHub",
-      igLabel: "Instagram",
-    },
-  }[lang];
-
-  /* === Estilos inline del card/velo (no purgables) === */
-  const cardStyle: React.CSSProperties = {
-  position: "relative",
-  zIndex: 40,
-  maxWidth: 720,
-  borderRadius: "var(--card-radius)",
-  padding: "2rem",
-  background: "var(--card-bg)",
-  backdropFilter: "var(--card-blur)",
-  WebkitBackdropFilter: "var(--card-blur)",
-  boxShadow: "var(--shadow-lg)",
-  border: "1px solid var(--card-border)",
+export type ContactCopy = {
+  title: string;
+  subtitle: string;
+  form: {
+    email: { label: string; placeholder: string; required: string; invalid: string };
+    subject: { label: string; placeholder: string; required: string };
+    message: { label: string; placeholder: string; required: string };
+    submit: string;
+    successHint: string;
+    srErrorPrefix: string;
+  };
+  links: {
+    linkedin: string;
+    github: string;
+    instagram: string;
+  };
 };
 
+const EMAIL = "pandresmatute@gmail.com";
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const veilStyle: React.CSSProperties = {
-    position: "absolute",
-    inset: 0 as unknown as number,
-    zIndex: 10,
-    background: "rgba(0,0,0,.30)",
-    maskImage: "radial-gradient(60% 60% at 20% 40%, black, transparent)",
-    WebkitMaskImage: "radial-gradient(60% 60% at 20% 40%, black, transparent)",
-    pointerEvents: "none",
+type FormState = {
+  email: string;
+  subject: string;
+  message: string;
+};
+
+type Errors = Partial<Record<keyof FormState, string>>;
+
+export default function ContactSection({ copy }: { copy: ContactCopy }) {
+  const [form, setForm] = useState<FormState>({ email: "", subject: "", message: "" });
+  const [errors, setErrors] = useState<Errors>({});
+  const [copied, setCopied] = useState(false);
+
+  const setField = (field: keyof FormState) =>
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const value = event.target.value;
+      setForm((prev) => ({ ...prev, [field]: value }));
+      setErrors((prev) => {
+        if (!prev[field]) return prev;
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    };
+
+  const validate = (): Errors => {
+    const next: Errors = {};
+    if (!form.email.trim()) next.email = copy.form.email.required;
+    else if (!EMAIL_REGEX.test(form.email.trim())) next.email = copy.form.email.invalid;
+
+    if (!form.subject.trim()) next.subject = copy.form.subject.required;
+    if (!form.message.trim()) next.message = copy.form.message.required;
+    return next;
   };
 
-  /* === Estilos inline para botones/iconos === */
-  const iconBtn: React.CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    border: "1px solid rgba(255,255,255,.25)",
-    background: "rgba(255,255,255,.08)",
-    color: "#fff",
-    textDecoration: "none",
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nextErrors = validate();
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      return;
+    }
+
+    const subject = encodeURIComponent(form.subject.trim());
+    const bodyLines = [form.message.trim(), "", "--------------------", `Sender: ${form.email.trim()}`];
+    const body = encodeURIComponent(bodyLines.join("\n"));
+
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   return (
     <section
       id="contacto"
-      className="relative isolate min-h-[70vh] w-full flex items-center py-16 sm:py-24 px-6 lg:px-12 text-white"
-      aria-label={t.title}
+      className="relative isolate min-h-[70vh] w-full flex items-center py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 text-white"
+      aria-label={copy.title}
     >
-      <div style={cardStyle}>
-        <h2 className="text-4xl font-bold tracking-tight">{t.title}</h2>
-        <p className="mt-3 text-base/7 text-white/80">{t.subtitle}</p>
+      <div className="relative z-40 w-full max-w-2xl rounded-2xl sm:rounded-3xl bg-white/10 p-6 sm:p-8 md:p-10 ring-1 ring-white/15 backdrop-blur-lg shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">{copy.title}</h2>
+        <p className="mt-3 text-sm sm:text-base text-white/80">{copy.subtitle}</p>
 
-        {/* Botón principal */}
-        <div className="mt-8">
-          <a
-            href={`mailto:${t.email}`}
-            className="inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium bg-orange-500 hover:bg-orange-600 transition"
-            aria-label={t.emailAria}
-          >
-            {t.emailBtn}
-          </a>
-        </div>
+        <form className="mt-6 sm:mt-8 space-y-4 sm:space-y-5" noValidate onSubmit={handleSubmit}>
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
+            <Field
+              id="contact-email"
+              label={copy.form.email.label}
+              placeholder={copy.form.email.placeholder}
+              value={form.email}
+              error={errors.email}
+              onChange={setField("email")}
+              prefix={copy.form.srErrorPrefix}
+              type="email"
+            />
+            <Field
+              id="contact-subject"
+              label={copy.form.subject.label}
+              placeholder={copy.form.subject.placeholder}
+              value={form.subject}
+              error={errors.subject}
+              onChange={setField("subject")}
+              prefix={copy.form.srErrorPrefix}
+              type="text"
+            />
+          </div>
 
-        {/* Correo debajo del botón */}
-        <div className="mt-4">
-          <a
-            href={`mailto:${t.email}`}
-            className="text-white/90 underline decoration-white/30 underline-offset-4 hover:decoration-white"
-            style={{ fontSize: 16 }}
-          >
-            {t.email}
-          </a>
-        </div>
+          <FieldTextArea
+            id="contact-message"
+            label={copy.form.message.label}
+            placeholder={copy.form.message.placeholder}
+            value={form.message}
+            error={errors.message}
+            onChange={setField("message")}
+            prefix={copy.form.srErrorPrefix}
+          />
 
-        {/* Logos debajo del correo */}
-        <div className="inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium btn-surface transition">
-          {/* LinkedIn */}
-          <a
-            href="https://linkedin.com/in/pablo-andres-matute"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={t.linkedInLabel}
-            aria-label={t.linkedInLabel}
-            style={iconBtn}
-          >
-            {/* SVG LinkedIn */}
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.135 1.447-2.135 2.943v5.663H9.352V9h3.414v1.561h.049c.476-.9 1.637-1.852 3.37-1.852 3.605 0 4.27 2.373 4.27 5.459v6.284zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM6.996 20.452H3.677V9h3.319v11.452z"/>
-            </svg>
-          </a>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pt-2">
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center rounded-xl px-4 sm:px-6 py-2.5 sm:py-3 font-semibold text-white transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/30 focus-visible:ring-offset-black/40"
+              style={{
+                background: 'linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0a0a0a 100%)',
+                boxShadow: '0 4px 15px rgba(22, 33, 62, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0a0a0a 100%)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0a0a0a 100%)';
+              }}
+            >
+              {copy.form.submit}
+            </button>
+            <p className="text-xs sm:text-sm text-white/65">{copy.form.successHint}</p>
+          </div>
+        </form>
 
-          {/* GitHub */}
-          <a
-            href="https://github.com/MatuCode"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={t.gitHubLabel}
-            aria-label={t.gitHubLabel}
-            style={iconBtn}
-          >
-            {/* SVG GitHub */}
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.11.79-.25.79-.56v-2.15c-3.22.7-3.9-1.39-3.9-1.39-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.74 1.27 3.41.97.11-.76.41-1.27.75-1.56-2.57-.29-5.27-1.29-5.27-5.73 0-1.26.45-2.3 1.2-3.11-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.22 1.19a11.2 11.2 0 0 1 5.86 0c2.24-1.5 3.22-1.19 3.22-1.19.63 1.58.23 2.75.11 3.04.75.81 1.2 1.85 1.2 3.11 0 4.45-2.71 5.44-5.29 5.72.42.36.81 1.07.81 2.16v3.2c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/>
-            </svg>
-          </a>
-
-          {/* Instagram */}
-          <a
-            href="https://instagram.com/matute.api.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={t.igLabel}
-            aria-label={t.igLabel}
-            style={iconBtn}
-          >
-            {/* SVG Instagram */}
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
-            </svg>
-          </a>
+        <div className="mt-6 sm:mt-8 space-y-3">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs sm:text-sm font-medium text-white/80">
+              Email
+            </label>
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className="inline-flex items-center justify-center rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white/85 ring-1 ring-white/20 bg-white/8 hover:bg-white/14 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/30 focus-visible:ring-offset-black/40 gap-2 w-full sm:w-auto"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              {EMAIL}
+              <svg className={`h-4 w-4 transition-all ${copied ? 'opacity-100' : 'opacity-0'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              {copied && <span className="text-green-300 text-xs">Copiado!</span>}
+            </button>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <SocialLink href="https://linkedin.com/in/pablo-andres-matute" label={copy.links.linkedin}>
+            {copy.links.linkedin}
+          </SocialLink>
+          <SocialLink href="https://github.com/MatuCode" label={copy.links.github}>
+            {copy.links.github}
+          </SocialLink>
+          <SocialLink href="https://instagram.com/matute.api.dev" label={copy.links.instagram}>
+            {copy.links.instagram}
+          </SocialLink>
+          </div>
         </div>
       </div>
 
-      <div aria-hidden="true" style={veilStyle} />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] bg-black/30"
+        
+      />
     </section>
   );
+}
+
+type FieldProps = {
+  id: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  error?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  prefix: string;
+  type: "text" | "email";
 };
 
-export default ContactSection;
+function Field({ id, label, placeholder, value, error, onChange, prefix, type }: FieldProps) {
+  const describedBy = error ? `${id}-error` : undefined;
+  return (
+    <div className="flex flex-col gap-1.5 sm:gap-2">
+      <label htmlFor={id} className="text-xs sm:text-sm font-medium text-white/80">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        aria-invalid={Boolean(error)}
+        aria-describedby={describedBy}
+        className={`w-full rounded-lg sm:rounded-xl bg-white/8 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-white ring-1 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 ${
+          error ? "ring-red-400/70" : "ring-white/15 hover:ring-white/25"
+        }`}
+      />
+      {error && (
+        <p id={describedBy} role="alert" className="text-xs font-medium text-red-300">
+          <span className="sr-only">{prefix}: </span>
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+type FieldTextAreaProps = {
+  id: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  error?: string;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  prefix: string;
+};
+
+function FieldTextArea({ id, label, placeholder, value, error, onChange, prefix }: FieldTextAreaProps) {
+  const describedBy = error ? `${id}-error` : undefined;
+  return (
+    <div className="flex flex-col gap-1.5 sm:gap-2">
+      <label htmlFor={id} className="text-xs sm:text-sm font-medium text-white/80">
+        {label}
+      </label>
+      <textarea
+        id={id}
+        name={id}
+        rows={5}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        aria-invalid={Boolean(error)}
+        aria-describedby={describedBy}
+        className={`w-full resize-none rounded-lg sm:rounded-xl bg-white/8 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-white ring-1 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 ${
+          error ? "ring-red-400/70" : "ring-white/15 hover:ring-white/25"
+        }`}
+      />
+      {error && (
+        <p id={describedBy} role="alert" className="text-xs font-medium text-red-300">
+          <span className="sr-only">{prefix}: </span>
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center justify-center rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white/85 ring-1 ring-white/20 bg-white/8 hover:bg-white/14 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/30 focus-visible:ring-offset-black/40"
+      aria-label={label}
+      title={label}
+    >
+      {children}
+    </a>
+  );
+}
+
+

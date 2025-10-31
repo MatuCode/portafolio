@@ -1,4 +1,4 @@
-﻿/* *Developed by pmatute */
+/* *Developed by pmatute */
 'use client';
 
 import { motion } from 'framer-motion';
@@ -33,7 +33,20 @@ export default function Hero() {
             {/* Botón CV */}
             <a
               href={`${BASE}/cv/PabloMatute-CV.pdf`}
-              className="rounded-2xl bg-orange-500 px-5 py-2.5 text-sm font-semibold text-black shadow-lg shadow-orange-900/30 ring-1 ring-orange-300 transition hover:-translate-y-[1px] hover:bg-orange-400 hover:shadow-orange-900/40"
+              className="rounded-2xl px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-[1px]"
+              style={{
+                background: 'linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0a0a0a 100%)',
+                boxShadow: '0 4px 15px rgba(22, 33, 62, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0a0a0a 100%)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(22, 33, 62, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0a0a0a 100%)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(22, 33, 62, 0.3)';
+              }}
             >
               Descargar CV
             </a>

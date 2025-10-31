@@ -1,27 +1,27 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 
-type Props = {
-  title?: string;
-  descriptionEs?: string;
-  descriptionEn?: string;
-  canonical?: string;
+export type SeoCopy = {
+  title: string;
+  description: string;
+  ogDescription: string;
 };
 
 export default function SeoHead({
-  title = "Pablo Matute · Full-Stack",
-  descriptionEs = "Desarrollador Full-Stack: Spring Boot, React/Next.js, SQL, despliegues en Vercel/Docker.",
-  descriptionEn = "Full-Stack Developer: Spring Boot, React/Next.js, SQL, deployments on Vercel/Docker.",
+  seo,
   canonical = "https://matucode.lat",
-}: Props) {
-  const { locale } = useRouter();
-  const desc = (locale ?? "es").startsWith("es") ? descriptionEs : descriptionEn;
+}: {
+  seo: SeoCopy;
+  canonical?: string;
+}) {
+  const normalizedCanonical = canonical.replace(/\/+$/, "");
+  const canonicalEs = `${normalizedCanonical}/`;
+  const canonicalEn = `${normalizedCanonical}/en`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Pablo Andrés Matute",
-    url: "https://matucode.lat",
+    url: normalizedCanonical,
     sameAs: [
       "https://www.linkedin.com/in/pablo-andres-matute",
       "https://github.com/MatuCode",
@@ -33,27 +33,30 @@ export default function SeoHead({
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={desc} />
-        <link rel="canonical" href={canonical} />
-
-        {/* Alternates por idioma */}
-        <link rel="alternate" hrefLang="es" href={`${canonical}/`} />
-        <link rel="alternate" hrefLang="en" href={`${canonical}/en`} />
-        <link rel="alternate" hrefLang="x-default" href={`${canonical}/`} />
-
-        {/* Open Graph */}
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <link rel="canonical" href={normalizedCanonical} />
+        <link rel="alternate" hrefLang="es" href={canonicalEs} />
+        <link rel="alternate" hrefLang="en" href={canonicalEn} />
+        <link rel="alternate" hrefLang="x-default" href={canonicalEs} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonical} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content="Spring Boot · React/Next.js · SQL" />
-        <meta property="og:image" content={`${canonical}/og.png`} />
+        <meta property="og:url" content={normalizedCanonical} />
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.ogDescription} />
+        <meta property="og:image" content={`${normalizedCanonical}/og.png`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Pablo Matute - Full-Stack Developer Portfolio" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seo.title} />
+        <meta name="twitter:description" content={seo.ogDescription} />
+        <meta name="twitter:image" content={`${normalizedCanonical}/og.png`} />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Pablo Andrés Matute" />
+        <meta name="keywords" content="desarrollador full-stack, spring boot, react, next.js, java, typescript, portfolio, desarrollador backend, desarrollador frontend" />
       </Head>
-
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </>

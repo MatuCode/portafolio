@@ -1,6 +1,8 @@
 /* *Developed by pmatute */
 import React from "react";
 
+// TODO: Legacy tab labels still hardcoded; migrate to dictionary when reusing component.
+
 export type TabKey =
   | "home"
   | "habilidades"
@@ -43,12 +45,17 @@ export default function TabNav({ active, onChange }: Props) {
           <button
             key={t.key}
             onClick={() => onChange(t.key)}
-            className={[
-              "px-4 py-2 rounded-xl text-sm transition",
-              isActive
-                ? "bg-orange-500 text-black shadow-[0_0_0_2px_rgba(255,255,255,.2)_inset]"
-                : "text-white/80 hover:text-white hover:bg-white/10",
-            ].join(" ")}
+              className={[
+                "px-4 py-2 rounded-xl text-sm transition",
+                isActive
+                  ? "text-white shadow-[0_0_0_2px_rgba(255,255,255,.2)_inset]"
+                  : "text-white/80 hover:text-white hover:bg-white/10",
+              ].join(" ")}
+            style={isActive ? {
+              background: 'linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0a0a0a 100%)',
+              boxShadow: '0 4px 15px rgba(22, 33, 62, 0.3), 0_0_0_2px_rgba(255,255,255,.2)_inset',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            } : {}}
           >
             {t.label}
           </button>

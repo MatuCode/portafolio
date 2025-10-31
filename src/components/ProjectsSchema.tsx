@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-type ProjectSEO = {
+export type ProjectSEO = {
   id: string;
   title: string;
   descriptionEs: string;
@@ -65,3 +65,4 @@ export default function ProjectsSchema({
     />
   );
 }
+

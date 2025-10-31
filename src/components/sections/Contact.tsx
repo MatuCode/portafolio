@@ -1,8 +1,11 @@
-/* *Developed by pmatute */
+import { useRouter } from "next/router";
+
+import { getDictionary } from "@/i18n";
+import ContactSection from "../ContactSection";
+
 export default function Contact() {
-  return (
-    <section className="min-h-screen flex items-center justify-center">
-      <div className="text-white/90">[Contacto]</div>
-    </section>
-  );
+  const { locale } = useRouter();
+  const dictionary = getDictionary(locale);
+
+  return <ContactSection copy={dictionary.contact} />;
 }

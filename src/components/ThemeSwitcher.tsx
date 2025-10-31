@@ -1,34 +1,46 @@
-import React, { JSX } from "react";
-import { useTheme, ThemeKey } from "@/theme/ThemeProvider";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { getDictionary } from "@/i18n";
 
-const THEMES: { key: ThemeKey; label: string; icon: JSX.Element }[] = [
-  { key: "dark", label: "Oscuro", icon: <span>🌑</span> },
-  { key: "neon", label: "Neón", icon: <span>🔆</span> },
-  { key: "pixel", label: "Pixel", icon: <span>🟪</span> },
-  { key: "future", label: "Futuro", icon: <span>🧊</span> },
+type Theme = "dark" | "neon" | "pixel";
+
+type ThemeOption = { key: Theme; dot: string };
+
+const THEME_OPTIONS: ThemeOption[] = [
+  { key: "dark", dot: "bg-fuchsia-400" },
+  { key: "neon", dot: "bg-cyan-400" },
+  { key: "pixel", dot: "bg-yellow-400" },
 ];
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { locale } = useRouter();
+  const dictionary = getDictionary(locale);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("theme") as Theme) || "dark";
+  });
+
+  useEffect(() => {
+    const el = document.documentElement;
+    el.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
-    <div
-      className="fixed top-6 left-6 z-[70] flex gap-2 p-2 rounded-2xl bg-black/45 backdrop-blur ring-1 ring-white/20"
-      aria-label="Theme switcher"
-    >
-      {THEMES.map((t) => {
-        const active = theme === t.key;
+    <div className="fixed top-4 left-4 z-[60] flex gap-2">
+      {THEME_OPTIONS.map((option) => {
+        const active = theme === option.key;
+        const label = dictionary.themes?.[option.key] ?? option.key;
         return (
           <button
-            key={t.key}
-            onClick={() => setTheme(t.key)}
-            className={`px-3 py-2 rounded-xl text-sm transition ${
-              active ? "bg-[var(--accent)] text-black" : "btn-surface"
-            }`}
-            title={t.label}
+            key={option.key}
+            onClick={() => setTheme(option.key)}
+            className={`flex items-center gap-2 rounded-xl px-4 py-2 ring-1 ring-white/20 backdrop-blur
+              ${active ? "bg-white/10" : "bg-black/40 hover:bg-black/50"} text-white`}
+            title={label}
           >
-            <span className="mr-1">{t.icon}</span>
-            {t.label}
+            <span className={`inline-block h-3 w-3 rounded-full ${option.dot}`} />
+            {label}
           </button>
         );
       })}

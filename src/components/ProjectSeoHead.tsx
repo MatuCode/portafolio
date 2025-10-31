@@ -4,19 +4,18 @@ import { useRouter } from "next/router";
 type Offer = { price: number; priceCurrency: string };
 
 type Props = {
-  canonical: string;            // URL absoluta del proyecto, ej: https://matucode.lat/proyectos/rsale
-  title: string;                // Título base (visible en <title>)
-  descriptionEs: string;        // Descripción ES
-  descriptionEn: string;        // Descripción EN
-  // Campos Schema.org (opcionales pero recomendados)
-  applicationCategory?: string; // ej: "BusinessApplication", "DeveloperApplication"
-  operatingSystem?: string;     // ej: "Web", "Cross-platform"
-  version?: string;             // ej: "1.0.0"
-  datePublished?: string;       // ISO (YYYY-MM-DD)
-  programmingLanguages?: string[]; // ej: ["Java", "TypeScript"]
-  softwareRequirements?: string[]; // ej: ["PostgreSQL", "Docker"]
-  keywords?: string[];          // tags/keywords
-  offers?: Offer | null;        // si aplica precio (saas/app), si no, null/omitir
+  canonical: string; // URL absoluta del proyecto, ej: https://matucode.lat/proyectos/rsale
+  title: string; // Título mostrado en <title>
+  descriptionEs: string; // Descripción en español
+  descriptionEn: string; // Descripción en inglés
+  applicationCategory?: string;
+  operatingSystem?: string;
+  version?: string;
+  datePublished?: string;
+  programmingLanguages?: string[];
+  softwareRequirements?: string[];
+  keywords?: string[];
+  offers?: Offer | null;
 };
 
 export default function ProjectSeoHead({
@@ -35,14 +34,18 @@ export default function ProjectSeoHead({
 }: Props) {
   const { locale } = useRouter();
   const isEs = (locale ?? "es").startsWith("es");
-  const desc = isEs ? descriptionEs : descriptionEn;
+  const description = isEs ? descriptionEs : descriptionEn;
 
-  const jsonLd: Record<string, any> = {
+  const normalizedCanonical = canonical.replace(/\/+$/, "");
+  const baseCanonical = normalizedCanonical.replace(/\/en$/i, "");
+  const canonicalEn = `${baseCanonical}/en`;
+
+  const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: title,
-    url: canonical,
-    description: desc,
+    url: normalizedCanonical,
+    description,
     applicationCategory,
     operatingSystem,
     author: {
@@ -70,14 +73,11 @@ export default function ProjectSeoHead({
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={desc} />
-        <link rel="canonical" href={canonical} />
-        {/* Alternates por idioma */}
-        <link rel="alternate" hrefLang="es" href={canonical.replace("/en", "")} />
-        <link rel="alternate" hrefLang="en" href={canonical.replace("://", "://") + "/en"} />
-        <link rel="alternate" hrefLang="x-default" href={canonical.replace("/en", "")} />
-
-        {/* Sin Open Graph ni Twitter (como pediste) */}
+        <meta name="description" content={description} />
+        <link rel="canonical" href={normalizedCanonical} />
+        <link rel="alternate" hrefLang="es" href={baseCanonical} />
+        <link rel="alternate" hrefLang="en" href={canonicalEn} />
+        <link rel="alternate" hrefLang="x-default" href={baseCanonical} />
         <meta name="robots" content="index,follow" />
       </Head>
 

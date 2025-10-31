@@ -1,10 +1,13 @@
-/* ──────────────────────────────────────────────
-   Global Styles  ·  Portafolio Pablo Matute
-   ────────────────────────────────────────────── */
+/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+   Global Styles  ┬╖  Portafolio Pablo Matute
+   ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Importar variaciones de fondo */
+@import './background-variations.css';
 
 /* ===== Base ===== */
 :root {
@@ -23,6 +26,7 @@ html {
 body {
   margin: 0;
   background: #0b0b0b;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -35,41 +39,93 @@ body {
 }
 
 /* ===== Fondo general del sitio =====
-   Usa /public/pablo-bg.jpg como fondo del layout */
+   Usa el patrón blanco elegante como fondo principal */
 .app-bg {
   position: relative;
   min-height: 100%;
-  background: #0b0b0b url("/pablo-bg.jpg") center right / cover no-repeat fixed;
+  background: 
+    linear-gradient(135deg, #0a0a0a 0%, #374151 50%, #ffffff 100%);
+  background-attachment: fixed;
 }
 
-/* Vignette / halo suave (opcional) */
+/* Patrón de puntos para el fondo blanco */
 .app-bg::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background:
-  radial-gradient(900px 560px at 72% 20%, rgba(255,140,0,.12), transparent 60%),
-  radial-gradient(1200px 720px at 50% 100%, rgba(0,0,0,.10), rgba(0,0,0,.25));
+  background: 
+    radial-gradient(1200px 720px at 50% 100%, rgba(0,0,0,.10), rgba(0,0,0,.25)),
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Foto en el costado */
+.app-bg::after {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 450px;
+  height: 100vh;
+  background-image: url('/me.png');
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  z-index: 1;
+  opacity: 0.9;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Ocultar la foto cuando hay un modal abierto */
+body.modal-open .app-bg::after {
+  opacity: 0;
+}
+
+/* Ocultar el menú de navegación cuando hay un modal abierto */
+body.modal-open nav {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 
 
 /* Asegura que el contenido viva encima del ::before */
-.app-bg > * {
+.app-bg > *:not([class*="fixed"]) {
   position: relative;
   z-index: 1;
 }
 
 /* En móviles, evita background-attachment: fixed por performance */
 @media (max-width: 768px) {
-  .app-bg { background-attachment: scroll; }
+  .app-bg { 
+    background-attachment: scroll; 
+  }
+  
+  /* Ajustar tamaño de la foto en tablets */
+  .app-bg::after {
+    width: 350px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-bg {
+    background-position: center center;
+  }
+  
+  /* Ajustar tamaño de la foto en móviles */
+  .app-bg::after {
+    width: 280px;
+  }
 }
 
 /* ===== Utilidades ===== */
 
-/* Ocultar scrollbars donde haga falta (menú pill) */
+/* Ocultar scrollbars donde haga falta (men├║ pill) */
 .no-scrollbar {
   -ms-overflow-style: none;      /* IE/Edge */
   scrollbar-width: none;         /* Firefox */
@@ -84,7 +140,7 @@ body {
   color: #fff;
 }
 
-/* Imágenes responsive por defecto (cuando no se usa Next/Image) */
+/* Im├ígenes responsive por defecto (cuando no se usa Next/Image) */
 img {
   max-width: 100%;
   height: auto;
@@ -98,9 +154,16 @@ img {
   border-radius: 6px;
 }
 
-/* Corrección para <dialog> / overlays si llegas a usarlos */
+/* Correcci├│n para <dialog> / overlays si llegas a usarlos */
 @supports (backdrop-filter: blur(4px)) {
   .backdrop-blur-safe {
     backdrop-filter: blur(6px);
+  }
+}
+
+/* Mejoras adicionales para móviles */
+@media (max-width: 640px) {
+  .app-bg {
+    background-position: center center;
   }
 }

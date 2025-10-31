@@ -1,0 +1,387 @@
+{
+  "languageSwitcher": {
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español"
+  },
+  "menu": {
+    "home": "Home",
+    "habilidades": "Habilidades",
+    "proyectos": "Proyectos",
+    "experiencia": "Experiencia",
+    "educacion": "Educación",
+    "certificaciones": "Certificaciones",
+    "contacto": "Contacto"
+  },
+  "hero": {
+    "name": "Pablo Andrés Matute",
+    "titles": [
+      "Ingeniero en Telecomunicaciones",
+      "Desarrollador Full-Stack (Java/Spring Boot · React/Next.js)"
+    ],
+    "blurb": "Creo aplicaciones de extremo a extremo: APIs REST seguras con Spring Boot y bases de datos SQL; y frontends modernos con React/Next.js. Me enfoco en buenas prácticas, testing y despliegues en Vercel/Docker.",
+    "cta": {
+      "downloadEs": "Descargar CV (ES)",
+      "downloadEn": "Download CV (EN)",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "sectionLabel": "Inicio / Home"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Selección de proyectos recientes con enfoque en backend, APIs REST y productos funcionales.",
+    "buttons": {
+      "instagram": "Instagram",
+      "video": "Video",
+      "images": "Imágenes",
+      "github": "GitHub",
+      "link": "Ver proyecto",
+      "showMore": "Ver más",
+      "showLess": "Ver menos",
+      "comingSoon": "Próximamente",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "close": "Cerrar",
+      "searchPlaceholder": "Buscar proyectos...",
+      "resultFound": "proyecto encontrado",
+      "resultsFound": "proyectos encontrados"
+    },
+    "items": [
+      {
+        "slug": "futurity",
+        "title": "Futurity — Inventario y Calidad de Servicio",
+        "description": "Sistema para gestionar inventario y calidad de servicio en un ISP: equipos, ubicaciones, auditorías y KPIs.",
+        "details": "Aplicación orientada a operaciones de red. Registra y localiza equipos (routers, ONUs, radios), permite auditorías con checklists, mantiene trazabilidad completa y genera indicadores de servicio con exportaciones PDF/Excel. Backend con Spring Boot (Java 17) y seguridad basada en roles; base de datos MySQL optimizada. Frontend con React/Next.js, formularios validados y paneles de KPIs. Despliegues con Docker y configuración por entorno.",
+        "note": "Los datos han sido modificados para proteger a la empresa.",
+        "context": "Pasantía de Desarrollo",
+        "contextType": "internship",
+        "image": "/projects/futurity.png",
+        "imageHD": "/projects/futurity.png",
+        "tech": [
+          "Java 17",
+          "Spring Boot",
+          "MySQL",
+          "React/Next.js",
+          "Docker",
+          "REST"
+        ],
+        "link": "#",
+        "video": "#",
+        "instagram": "https://instagram.com/matute.api.dev",
+        "gallery": [
+          "/projects/futurity-1.jpg",
+          "/projects/futurity-2.jpg",
+          "/projects/futurity-3.jpg"
+        ]
+      },
+      {
+        "slug": "relatos-de-papel",
+        "title": "Relatos de Papel",
+        "description": "Plataforma editorial con búsqueda avanzada, filtros combinables y panel de administración.",
+        "details": "Proyecto de maestría orientado a e-commerce editorial. Catálogo con filtros por autor, tema y editorial, búsqueda eficiente, paginación y carrito con pasarela simulada. Área privada para CRUD de libros, autores y existencias, además de analítica básica. Backend en Spring Boot con DTOs y validaciones; frontend en Next.js con SSR, i18n y componentes reutilizables.",
+        "context": "Proyecto de Maestría",
+        "contextType": "academic",
+        "image": "/projects/relatos.jpg",
+        "imageHD": "/projects/relatos.jpg",
+        "tech": [
+          "Java",
+          "Spring Boot",
+          "SQL",
+          "Next.js",
+          "React",
+          "REST"
+        ],
+        "link": "https://relatos-de-papel-store.vercel.app/",
+        "github": "https://github.com/MatuCode/relatos-de-papel-store",
+        "video": "#",
+        "instagram": "https://instagram.com/matute.api.dev",
+        "gallery": [
+          "/projects/relatos-1.jpg",
+          "/projects/relatos-2.jpg",
+          "/projects/relatos-3.jpg"
+        ]
+      },
+      {
+        "slug": "reltorsale",
+        "title": "ReltorSale",
+        "description": "Plataforma inmobiliaria con control de stock, variantes y reportería operativa.",
+        "details": "Solución end-to-end para administrar propiedades, variantes, existencias y pedidos. API REST segura con Spring Boot (autenticación JWT, validaciones, paginación y filtros) sobre SQL optimizado. Frontend React/Next.js responsivo con formularios validados. Despliegues automatizados y manejo de variables por entorno.",
+        "context": "Desarrollo Backend - Ladrillo IT",
+        "contextType": "professional",
+        "image": "/projects/rsale.jpeg",
+        "imageHD": "/projects/rsale.jpeg",
+        "tech": [
+          "Java",
+          "Spring Boot",
+          "SQL",
+          "Next.js",
+          "React",
+          "REST"
+        ],
+        "link": "#",
+        "video": "#",
+        "instagram": "https://instagram.com/matute.api.dev",
+        "gallery": [
+          "/projects/rsale-1.jpg",
+          "/projects/rsale-2.jpg",
+          "/projects/rsale-3.jpg"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "title": "Experiencia",
+    "subtitle": "Roles, logros y stack principal.",
+    "items": [
+      {
+        "role": "Desarrollador Backend / Full-stack",
+        "company": "Ladrillo IT",
+        "project": "ReltorSale",
+        "period": "Junio 2025 — Presente",
+        "location": "Ecuador / remoto",
+        "bullets": [
+          "Desarrollo de plataforma inmobiliaria ReltorSale para gestión de propiedades reales.",
+          "Diseño de API REST con Spring Boot (JWT, paginación, validaciones y multitenancy ligero).",
+          "Modelado SQL para listados, imágenes y reportes operativos.",
+          "Mantenimiento de panel administrativo React/Next.js con Tailwind y pruebas E2E."
+        ],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "MySQL",
+          "React/Next.js",
+          "Tailwind",
+          "Git"
+        ]
+      },
+      {
+        "role": "Pasante de Desarrollo (Backend)",
+        "company": "Futurity",
+        "period": "Septiembre 2025 — Noviembre 2025",
+        "location": "Local",
+        "bullets": [
+          "Modelado y normalización de base de datos para inventarios e indicadores de servicio.",
+          "Aplicación local para control de inventarios, calidad de servicio y registro de equipos.",
+          "Soporte en reportería y trazabilidad de activos."
+        ],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "MySQL",
+          "React/Vite"
+        ]
+      },
+      {
+        "role": "Consultor de Desarrollo Web",
+        "company": "Consultoría V-AST · UNEMI",
+        "period": "Abril 2024 — Septiembre 2024",
+        "bullets": [
+          "Consultoría para aplicación web universitaria de gestión académica.",
+          "Definición de arquitectura, componentes reutilizables y buenas prácticas.",
+          "Entrega de prototipo funcional y documentación técnica."
+        ],
+        "stack": [
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "Git"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Educación",
+    "subtitle": "Formación universitaria y modalidad de estudio.",
+    "viewTitle": "Ver título",
+    "close": "Cerrar",
+    "chips": {
+      "modality": "Modalidad",
+      "location": "Ubicación",
+      "inProgress": "En proceso"
+    },
+    "items": [
+      {
+        "degree": "Máster Universitario en Ingeniería de Software y Sistemas Informáticos",
+        "institution": "UNIR — Universidad Internacional de La Rioja",
+        "location": "España",
+        "modality": "Virtual",
+        "period": "Marzo 2025 — Febrero 2026",
+        "status": "En proceso"
+      },
+      {
+        "degree": "Ingeniero en Telecomunicaciones",
+        "institution": "UTPL — Universidad Técnica Particular de Loja",
+        "location": "Loja, Ecuador",
+        "modality": "Presencial",
+        "period": "2018 — 2024",
+        "titleImage": "/titles/utpl-telecomunicaciones.jpg"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Habilidades",
+    "subtitle": "Lenguajes, frameworks y tecnologías que uso a diario.",
+    "groups": {
+      "languages": "Lenguajes",
+      "frameworks": "Frameworks",
+      "technologies": "Tecnologías",
+      "langs": "Idiomas"
+    },
+    "languageLevels": [
+      {
+        "code": "ES",
+        "name": "Español",
+        "level": "Nativo"
+      },
+      {
+        "code": "EN",
+        "name": "Inglés",
+        "level": "B2"
+      }
+    ]
+  },
+  "certs": {
+    "title": "Certificaciones",
+    "subtitle": "Seleccionadas por relevancia. Pulsa “Ver” para abrir la imagen.",
+    "view": "Ver",
+    "close": "Cerrar",
+    "more": "Ver más",
+    "less": "Ver menos",
+    "items": [
+      {
+        "id": "efset",
+        "tags": [
+          "Inglés",
+          "B2"
+        ],
+        "issuer": "EF SET",
+        "priority": 1,
+        "date": "May 2025",
+        "img": "/certs/EF.jpg",
+        "title": "EF SET English Certificate – B2"
+      },
+      {
+        "id": "leadership",
+        "issuer": "City University Miami (MIU – Continuing Education)",
+        "priority": 2,
+        "date": "Ago 2024",
+        "img": "/certs/Leadership.jpg",
+        "title": "Continuing Education Certificate in Leadership (45 h)"
+      },
+      {
+        "id": "cisco-srw",
+        "tags": [
+          "Redes"
+        ],
+        "issuer": "Cisco Networking Academy",
+        "priority": 3,
+        "date": "Jul 2021",
+        "img": "/certs/Cisco-SRW.jpg",
+        "title": "CCNAv7: Switching, Routing and Wireless Essentials"
+      },
+      {
+        "id": "cisco-intro",
+        "tags": [
+          "Redes"
+        ],
+        "issuer": "Cisco Networking Academy",
+        "priority": 4,
+        "date": "Feb 2021",
+        "img": "/certs/Cisco-IntroduccionRedes.jpg",
+        "title": "CCNAv7: Introducción a Redes"
+      },
+      {
+        "id": "ms-linkedin-software",
+        "issuer": "Microsoft & LinkedIn Learning",
+        "priority": 5,
+        "date": "Jun 2024",
+        "img": "/certs/Linkedin-Software.jpg",
+        "title": "Fundamentos profesionales del desarrollo de software"
+      },
+      {
+        "id": "ms-linkedin-cyber",
+        "issuer": "Microsoft & LinkedIn Learning",
+        "priority": 6,
+        "date": "Jun 2024",
+        "img": "/certs/Linkedin-Cibersecurity.jpg",
+        "title": "Fundamentos profesionales en ciberseguridad"
+      },
+      {
+        "id": "certiprof",
+        "issuer": "CertiProf",
+        "priority": 7,
+        "date": "Vigente",
+        "img": "/certs/certifpro.jpg",
+        "title": "Cybersecurity Awareness Professional Certification (ES)"
+      },
+      {
+        "id": "excel-advanced",
+        "issuer": "Operador de Capacitación · Ministerio del Trabajo",
+        "priority": 8,
+        "date": "Feb 2024",
+        "img": "/certs/Excel.jpg",
+        "title": "Excel avanzado: validación de datos, fórmulas, macros y tablas dinámicas (40 h)"
+      },
+      {
+        "id": "fine-tuned-b2",
+        "tags": [
+          "Inglés",
+          "B2"
+        ],
+        "issuer": "Fine-Tuned English Language Institute",
+        "priority": 9,
+        "date": "Nov 2024",
+        "img": "/certs/FTN.jpg",
+        "title": "Certificación Nivel B2 en Inglés (B2.3)"
+      },
+      {
+        "id": "mastermind",
+        "issuer": "Mastermind",
+        "priority": 10,
+        "date": "2021",
+        "img": "/certs/mastermind.jpg",
+        "title": "MasterMind Program Certificate"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Completa el formulario o escríbeme directamente. Respondo lo antes posible.",
+    "form": {
+      "email": {
+        "label": "Tu correo",
+        "placeholder": "tu@correo.com",
+        "required": "Campo requerido",
+        "invalid": "Correo inválido"
+      },
+      "subject": {
+        "label": "Asunto",
+        "placeholder": "Coloca el asunto del mensaje",
+        "required": "Campo requerido"
+      },
+      "message": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntame brevemente sobre tu proyecto o consulta…",
+        "required": "Campo requerido"
+      },
+      "submit": "Enviar",
+      "successHint": "Se abrirá tu cliente de correo para enviar el mensaje.",
+      "srErrorPrefix": "Error"
+    },
+    "links": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "instagram": "Instagram"
+    }
+  },
+  "seo": {
+    "title": "Pablo Matute · Desarrollador Full-Stack",
+    "description": "Desarrollador Full-Stack especializado en Spring Boot y React/Next.js. Portafolio, experiencia y proyectos.",
+    "ogDescription": "Spring Boot · React/Next.js · SQL"
+  },
+  "themes": {
+    "dark": "Oscuro",
+    "neon": "Neón",
+    "pixel": "Pixel"
+  }
+}

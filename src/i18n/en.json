@@ -1,0 +1,752 @@
+{
+  "languageSwitcher": {
+    "switchToEnglish": "Switch to English",
+    "switchToSpanish": "Switch to Spanish"
+  },
+  "menu": {
+    "home": "Home",
+    "habilidades": "Skills",
+    "proyectos": "Projects",
+    "experiencia": "Experience",
+    "educacion": "Education",
+    "certificaciones": "Certifications",
+    "contacto": "Contact"
+  },
+  "hero": {
+    "name": "Pablo Andrés Matute",
+    "titles": [
+      "Telecommunications Engineer",
+      "Full-Stack Developer (Java/Spring Boot · React/Next.js)"
+    ],
+    "blurb": "I build end-to-end apps: secure REST APIs with Spring Boot and SQL databases, and modern front-ends with React/Next.js. I focus on best practices, testing, and deployments on Vercel/Docker.",
+    "cta": {
+      "downloadEs": "Download CV (ES)",
+      "downloadEn": "Download CV (EN)",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "sectionLabel": "Home"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Selected work focused on backend, REST APIs, and functional products.",
+    "buttons": {
+      "instagram": "Instagram",
+      "video": "Video",
+      "images": "Images",
+      "github": "GitHub",
+      "link": "View project",
+      "showMore": "Show more",
+      "showLess": "Show less",
+      "comingSoon": "Coming soon",
+      "previous": "Previous",
+      "next": "Next",
+      "close": "Close",
+      "searchPlaceholder": "Search projects...",
+      "resultFound": "project found",
+      "resultsFound": "projects found"
+    },
+    "items": [
+      {
+        "slug": "futurity",
+        "title": "Futurity — Inventory & Service Quality",
+        "description": "Inventory and service-quality management for an ISP: devices, locations, audits, and KPI dashboards.",
+        "details": "Web app for network operations that manages 500+ network devices across 15 locations. Register and locate devices (routers, ONUs, radios), run checklist-based audits, keep full traceability, and generate service KPIs with PDF/Excel exports. Backend built with Spring Boot (Java 17) and role-based security; optimized MySQL schema with queries processing 2K+ records in <200ms. Frontend with React/Next.js, validated forms, and KPI dashboards. Deployments via Docker and environment-specific configs. Result: 60% reduction in audit time and 95% inventory accuracy.",
+        "note": "Data has been modified to protect the company.",
+        "context": "Development Internship",
+        "contextType": "internship",
+        "image": "/projects/futurity.png",
+        "imageHD": "/projects/futurity.png",
+        "tech": [
+          "Java 17",
+          "Spring Boot",
+          "MySQL",
+          "React/Next.js",
+          "Docker",
+          "REST"
+        ],
+        "link": "#",
+        "video": "#",
+        "instagram": "https://instagram.com/matute.api.dev",
+        "gallery": [
+          "/projects/futurity-1.jpg",
+          "/projects/futurity-2.jpg",
+          "/projects/futurity-3.jpg"
+        ]
+      },
+      {
+        "slug": "relatos-de-papel",
+        "title": "Relatos de Papel",
+        "description": "Editorial platform with advanced search, faceted filters, and an admin dashboard.",
+        "details": "Master's project for an editorial e-commerce workflow that manages 1,200+ books from 50+ publishers. Catalog with filters by author, topic, and publisher, efficient search with Elasticsearch (responses <100ms), optimized pagination, and a simulated checkout cart. Private area handles CRUD for books, authors, and stock, plus basic sales analytics. Spring Boot backend with DTOs and validation; Next.js frontend with SSR, i18n, and reusable components. Result: 40% improvement in search speed and 85% user satisfaction in usability.",
+        "context": "Master's Project",
+        "contextType": "academic",
+        "image": "/projects/relatos.jpg",
+        "imageHD": "/projects/relatos.jpg",
+        "tech": [
+          "Java",
+          "Spring Boot",
+          "SQL",
+          "Next.js",
+          "React",
+          "REST"
+        ],
+        "link": "https://relatos-de-papel-store.vercel.app/",
+        "github": "https://github.com/MatuCode/relatos-de-papel-store",
+        "video": "#",
+        "instagram": "https://instagram.com/matute.api.dev",
+        "gallery": [
+          "/projects/relatos-1.jpg",
+          "/projects/relatos-2.jpg",
+          "/projects/relatos-3.jpg"
+        ]
+      },
+      {
+        "slug": "reltorsale",
+        "title": "ReltorSale",
+        "description": "Real-estate platform with inventory control, variants, and operational reporting.",
+        "details": "End-to-end solution to manage properties, variants, stock, and orders that processes 300+ active properties. Secure REST API with Spring Boot (JWT authentication, validation, pagination, filtering) backed by optimized SQL with queries handling 5K+ records. Responsive React/Next.js frontend with validated forms. Automated deployments and environment-specific configuration. Result: 70% reduction in inventory management time and 99.5% production uptime.",
+        "context": "Backend Development - Ladrillo IT",
+        "contextType": "professional",
+        "image": "/projects/rsale.jpeg",
+        "imageHD": "/projects/rsale.jpeg",
+        "tech": [
+          "Java",
+          "Spring Boot",
+          "SQL",
+          "Next.js",
+          "React",
+          "REST"
+        ],
+        "link": "#",
+        "video": "#",
+        "instagram": "https://instagram.com/matute.api.dev",
+        "gallery": [
+          "/projects/rsale-1.jpg",
+          "/projects/rsale-2.jpg",
+          "/projects/rsale-3.jpg"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "Roles, impact, and primary stack.",
+    "items": [
+      {
+        "role": "Backend / Full-stack Developer",
+        "company": "Ladrillo IT",
+        "project": "ReltorSale",
+        "period": "June 2025 — Present",
+        "location": "Ecuador / remote",
+        "bullets": [
+          "Developing the ReltorSale real-estate platform for property management in production.",
+          "Designing REST APIs with Spring Boot (JWT, pagination, validation, lightweight multi-tenancy).",
+          "SQL modeling for listings, media assets, and operational reports.",
+          "Maintaining the React/Next.js admin panel with Tailwind and E2E testing."
+        ],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "MySQL",
+          "React/Next.js",
+          "Tailwind",
+          "Git"
+        ]
+      },
+      {
+        "role": "Backend Intern",
+        "company": "Futurity",
+        "period": "September 2025 — November 2025",
+        "location": "On-site",
+        "bullets": [
+          "DB modeling & normalization for inventory and service-quality metrics.",
+          "Local web app for inventory control, service quality, and equipment registry.",
+          "Support for reporting and asset traceability."
+        ],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "MySQL",
+          "React/Vite"
+        ]
+      },
+      {
+        "role": "Web Development Consultant",
+        "company": "V-AST Consulting · UNEMI",
+        "period": "April 2024 — September 2024",
+        "bullets": [
+          "Consulting for a university web application.",
+          "Defined architecture, reusable components, and best practices.",
+          "Delivered functional prototype and technical documentation."
+        ],
+        "stack": [
+          "TypeScript",
+          "Next.js",
+          "Tailwind",
+          "Git"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "Academic background and study modality.",
+    "viewTitle": "View diploma",
+    "close": "Close",
+    "chips": {
+      "modality": "Modality",
+      "location": "Location",
+      "inProgress": "In progress"
+    },
+    "items": [
+      {
+        "degree": "Master’s in Software Engineering and Computer Systems",
+        "institution": "UNIR — International University of La Rioja",
+        "location": "Spain",
+        "modality": "Online",
+        "period": "March 2025 — February 2026",
+        "status": "In progress"
+      },
+      {
+        "degree": "Telecommunications Engineer",
+        "institution": "UTPL — Technical Private University of Loja",
+        "location": "Loja, Ecuador",
+        "modality": "On-campus",
+        "period": "2018 — 2024",
+        "titleImage": "/titles/utpl-telecomunicaciones.jpg"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Languages, frameworks and technologies I use daily.",
+    "groups": {
+      "languages": "Languages",
+      "frameworks": "Frameworks",
+      "technologies": "Technologies",
+      "langs": "Languages"
+    },
+    "languageLevels": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "level": "Native"
+      },
+      {
+        "code": "EN",
+        "name": "English",
+        "level": "B2"
+      }
+    ]
+  },
+  "certs": {
+    "title": "Certifications",
+    "subtitle": "Selected by relevance. Press “View” to open the image.",
+    "view": "View",
+    "close": "Close",
+    "more": "Show more",
+    "less": "Show less",
+    "items": [
+      {
+        "id": "efset",
+        "tags": [
+          "English",
+          "B2"
+        ],
+        "issuer": "EF SET",
+        "priority": 1,
+        "date": "May 2025",
+        "img": "/certs/EF.jpg",
+        "title": "EF SET English Certificate – B2"
+      },
+      {
+        "id": "leadership",
+        "issuer": "City University Miami (MIU – Continuing Education)",
+        "priority": 2,
+        "date": "Aug 2024",
+        "img": "/certs/Leadership.jpg",
+        "title": "Continuing Education Certificate in Leadership (45 h)"
+      },
+      {
+        "id": "cisco-srw",
+        "tags": [
+          "Networking"
+        ],
+        "issuer": "Cisco Networking Academy",
+        "priority": 3,
+        "date": "Jul 2021",
+        "img": "/certs/Cisco-SRW.jpg",
+        "title": "CCNAv7: Switching, Routing and Wireless Essentials"
+      },
+      {
+        "id": "cisco-intro",
+        "tags": [
+          "Networking"
+        ],
+        "issuer": "Cisco Networking Academy",
+        "priority": 4,
+        "date": "Feb 2021",
+        "img": "/certs/Cisco-IntroduccionRedes.jpg",
+        "title": "CCNAv7: Introduction to Networks"
+      },
+      {
+        "id": "ms-linkedin-software",
+        "issuer": "Microsoft & LinkedIn Learning",
+        "priority": 5,
+        "date": "Jun 2024",
+        "img": "/certs/Linkedin-Software.jpg",
+        "title": "Professional Fundamentals of Software Development"
+      },
+      {
+        "id": "ms-linkedin-cyber",
+        "issuer": "Microsoft & LinkedIn Learning",
+        "priority": 6,
+        "date": "Jun 2024",
+        "img": "/certs/Linkedin-Cibersecurity.jpg",
+        "title": "Professional Fundamentals in Cybersecurity"
+      },
+      {
+        "id": "certiprof",
+        "issuer": "CertiProf",
+        "priority": 7,
+        "date": "Active",
+        "img": "/certs/certifpro.jpg",
+        "title": "Cybersecurity Awareness Professional Certification (ES)"
+      },
+      {
+        "id": "excel-advanced",
+        "issuer": "Training Operator · Ministry of Labor",
+        "priority": 8,
+        "date": "Feb 2024",
+        "img": "/certs/Excel.jpg",
+        "title": "Advanced Excel: Data Validation, Formulas, Macros & Pivot Tables (40 h)"
+      },
+      {
+        "id": "fine-tuned-b2",
+        "tags": [
+          "English",
+          "B2"
+        ],
+        "issuer": "Fine-Tuned English Language Institute",
+        "priority": 9,
+        "date": "Nov 2024",
+        "img": "/certs/FTN.jpg",
+        "title": "English Level B2 Certification (B2.3)"
+      },
+      {
+        "id": "mastermind",
+        "issuer": "Mastermind",
+        "priority": 10,
+        "date": "2021",
+        "img": "/certs/mastermind.jpg",
+        "title": "MasterMind Program Certificate"
+      },
+      {
+        "id": "linkedin-azure-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 11,
+        "date": "2024",
+        "img": "/certifications/Azure-Fundamentals.pdf",
+        "pdf": "/certifications/Azure-Fundamentals.pdf",
+        "title": "Azure Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Azure", "Cloud Computing"]
+      },
+      {
+        "id": "linkedin-azure-data-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 12,
+        "date": "2024",
+        "img": "/certifications/Azure-Data-Fundamentals.pdf",
+        "pdf": "/certifications/Azure-Data-Fundamentals.pdf",
+        "title": "Azure Data Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Azure", "Data", "Cloud"]
+      },
+      {
+        "id": "linkedin-azure-security-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 13,
+        "date": "2024",
+        "img": "/certifications/Azure-Security-Fundamentals.pdf",
+        "pdf": "/certifications/Azure-Security-Fundamentals.pdf",
+        "title": "Azure Security Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Azure", "Security", "Cloud"]
+      },
+      {
+        "id": "linkedin-cybersecurity-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 14,
+        "date": "2024",
+        "img": "/certifications/Cybersecurity-Fundamentals.pdf",
+        "pdf": "/certifications/Cybersecurity-Fundamentals.pdf",
+        "title": "Cybersecurity Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Cybersecurity", "Security"]
+      },
+      {
+        "id": "linkedin-data-analysis-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 15,
+        "date": "2024",
+        "img": "/certifications/Data-Analysis-Fundamentals.pdf",
+        "pdf": "/certifications/Data-Analysis-Fundamentals.pdf",
+        "title": "Data Analysis Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Data Analysis", "Analytics"]
+      },
+      {
+        "id": "linkedin-data-science-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 16,
+        "date": "2024",
+        "img": "/certifications/Data-Science-Fundamentals.pdf",
+        "pdf": "/certifications/Data-Science-Fundamentals.pdf",
+        "title": "Data Science Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Data Science", "Machine Learning"]
+      },
+      {
+        "id": "linkedin-devops-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 17,
+        "date": "2024",
+        "img": "/certifications/DevOps-Fundamentals.pdf",
+        "pdf": "/certifications/DevOps-Fundamentals.pdf",
+        "title": "DevOps Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["DevOps", "CI/CD"]
+      },
+      {
+        "id": "linkedin-git-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 18,
+        "date": "2024",
+        "img": "/certifications/Git-Fundamentals.pdf",
+        "pdf": "/certifications/Git-Fundamentals.pdf",
+        "title": "Git Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Git", "Version Control"]
+      },
+      {
+        "id": "linkedin-html-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 19,
+        "date": "2024",
+        "img": "/certifications/HTML-Fundamentals.pdf",
+        "pdf": "/certifications/HTML-Fundamentals.pdf",
+        "title": "HTML Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["HTML", "Web Development"]
+      },
+      {
+        "id": "linkedin-java-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 20,
+        "date": "2024",
+        "img": "/certifications/Java-Fundamentals.pdf",
+        "pdf": "/certifications/Java-Fundamentals.pdf",
+        "title": "Java Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Java", "Programming"]
+      },
+      {
+        "id": "linkedin-javascript-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 21,
+        "date": "2024",
+        "img": "/certifications/JavaScript-Fundamentals.pdf",
+        "pdf": "/certifications/JavaScript-Fundamentals.pdf",
+        "title": "JavaScript Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["JavaScript", "Web Development"]
+      },
+      {
+        "id": "linkedin-linux-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 22,
+        "date": "2024",
+        "img": "/certifications/Linux-Fundamentals.pdf",
+        "pdf": "/certifications/Linux-Fundamentals.pdf",
+        "title": "Linux Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Linux", "Operating Systems"]
+      },
+      {
+        "id": "linkedin-networking-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 23,
+        "date": "2024",
+        "img": "/certifications/Networking-Fundamentals.pdf",
+        "pdf": "/certifications/Networking-Fundamentals.pdf",
+        "title": "Networking Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Networking", "TCP/IP"]
+      },
+      {
+        "id": "linkedin-python-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 24,
+        "date": "2024",
+        "img": "/certifications/Python-Fundamentals.pdf",
+        "pdf": "/certifications/Python-Fundamentals.pdf",
+        "title": "Python Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Python", "Programming"]
+      },
+      {
+        "id": "linkedin-sql-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 25,
+        "date": "2024",
+        "img": "/certifications/SQL-Fundamentals.pdf",
+        "pdf": "/certifications/SQL-Fundamentals.pdf",
+        "title": "SQL Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["SQL", "Database"]
+      },
+      {
+        "id": "linkedin-web-development-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 26,
+        "date": "2024",
+        "img": "/certifications/Web-Development-Fundamentals.pdf",
+        "pdf": "/certifications/Web-Development-Fundamentals.pdf",
+        "title": "Web Development Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Web Development", "Frontend"]
+      },
+      {
+        "id": "linkedin-windows-server-fundamentals",
+        "issuer": "LinkedIn Learning",
+        "priority": 27,
+        "date": "2024",
+        "img": "/certifications/Windows-Server-Fundamentals.pdf",
+        "pdf": "/certifications/Windows-Server-Fundamentals.pdf",
+        "title": "Windows Server Fundamentals",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Windows Server", "Server Administration"]
+      },
+      {
+        "id": "linkedin-advanced-cybersecurity",
+        "issuer": "LinkedIn Learning",
+        "priority": 28,
+        "date": "2024",
+        "img": "/certifications/Advanced-Cybersecurity.pdf",
+        "pdf": "/certifications/Advanced-Cybersecurity.pdf",
+        "title": "Advanced Cybersecurity",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Cybersecurity", "Advanced Security"]
+      },
+      {
+        "id": "linkedin-advanced-data-analysis",
+        "issuer": "LinkedIn Learning",
+        "priority": 29,
+        "date": "2024",
+        "img": "/certifications/Advanced-Data-Analysis.pdf",
+        "pdf": "/certifications/Advanced-Data-Analysis.pdf",
+        "title": "Advanced Data Analysis",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Data Analysis", "Advanced Analytics"]
+      },
+      {
+        "id": "linkedin-advanced-devops",
+        "issuer": "LinkedIn Learning",
+        "priority": 30,
+        "date": "2024",
+        "img": "/certifications/Advanced-DevOps.pdf",
+        "pdf": "/certifications/Advanced-DevOps.pdf",
+        "title": "Advanced DevOps",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["DevOps", "Advanced CI/CD"]
+      },
+      {
+        "id": "linkedin-advanced-git",
+        "issuer": "LinkedIn Learning",
+        "priority": 31,
+        "date": "2024",
+        "img": "/certifications/Advanced-Git.pdf",
+        "pdf": "/certifications/Advanced-Git.pdf",
+        "title": "Advanced Git",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Git", "Advanced Version Control"]
+      },
+      {
+        "id": "linkedin-advanced-html",
+        "issuer": "LinkedIn Learning",
+        "priority": 32,
+        "date": "2024",
+        "img": "/certifications/Advanced-HTML.pdf",
+        "pdf": "/certifications/Advanced-HTML.pdf",
+        "title": "Advanced HTML",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["HTML", "Advanced Web Development"]
+      },
+      {
+        "id": "linkedin-advanced-java",
+        "issuer": "LinkedIn Learning",
+        "priority": 33,
+        "date": "2024",
+        "img": "/certifications/Advanced-Java.pdf",
+        "pdf": "/certifications/Advanced-Java.pdf",
+        "title": "Advanced Java",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Java", "Advanced Programming"]
+      },
+      {
+        "id": "linkedin-advanced-javascript",
+        "issuer": "LinkedIn Learning",
+        "priority": 34,
+        "date": "2024",
+        "img": "/certifications/Advanced-JavaScript.pdf",
+        "pdf": "/certifications/Advanced-JavaScript.pdf",
+        "title": "Advanced JavaScript",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["JavaScript", "Advanced Web Development"]
+      },
+      {
+        "id": "linkedin-advanced-linux",
+        "issuer": "LinkedIn Learning",
+        "priority": 35,
+        "date": "2024",
+        "img": "/certifications/Advanced-Linux.pdf",
+        "pdf": "/certifications/Advanced-Linux.pdf",
+        "title": "Advanced Linux",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Linux", "Advanced System Administration"]
+      },
+      {
+        "id": "linkedin-advanced-networking",
+        "issuer": "LinkedIn Learning",
+        "priority": 36,
+        "date": "2024",
+        "img": "/certifications/Advanced-Networking.pdf",
+        "pdf": "/certifications/Advanced-Networking.pdf",
+        "title": "Advanced Networking",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Networking", "Advanced TCP/IP"]
+      },
+      {
+        "id": "linkedin-advanced-python",
+        "issuer": "LinkedIn Learning",
+        "priority": 37,
+        "date": "2024",
+        "img": "/certifications/Advanced-Python.pdf",
+        "pdf": "/certifications/Advanced-Python.pdf",
+        "title": "Advanced Python",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Python", "Advanced Programming"]
+      },
+      {
+        "id": "linkedin-advanced-sql",
+        "issuer": "LinkedIn Learning",
+        "priority": 38,
+        "date": "2024",
+        "img": "/certifications/Advanced-SQL.pdf",
+        "pdf": "/certifications/Advanced-SQL.pdf",
+        "title": "Advanced SQL",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["SQL", "Advanced Database"]
+      },
+      {
+        "id": "linkedin-advanced-web-development",
+        "issuer": "LinkedIn Learning",
+        "priority": 39,
+        "date": "2024",
+        "img": "/certifications/Advanced-Web-Development.pdf",
+        "pdf": "/certifications/Advanced-Web-Development.pdf",
+        "title": "Advanced Web Development",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Web Development", "Advanced Frontend"]
+      },
+      {
+        "id": "linkedin-advanced-windows-server",
+        "issuer": "LinkedIn Learning",
+        "priority": 40,
+        "date": "2024",
+        "img": "/certifications/Advanced-Windows-Server.pdf",
+        "pdf": "/certifications/Advanced-Windows-Server.pdf",
+        "title": "Advanced Windows Server",
+        "category": "LinkedIn",
+        "issuerType": "LinkedIn",
+        "tags": ["Windows Server", "Advanced Server Administration"]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Have a project in mind?",
+    "subtitle": "Let's talk about how I can help you build something amazing. I'm available for freelance projects and collaboration opportunities.",
+    "form": {
+      "email": {
+        "label": "Your email",
+        "placeholder": "you@email.com",
+        "required": "Required field",
+        "invalid": "Invalid email"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Write the subject of your message",
+        "required": "Required field"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell me about your project or question…",
+        "required": "Required field"
+      },
+      "submit": "Send message",
+      "successHint": "Your email client will open so you can send the message.",
+      "srErrorPrefix": "Error"
+    },
+    "links": {
+      "linkedin": "Connect on LinkedIn",
+      "github": "View my code",
+      "instagram": "Follow on Instagram"
+    },
+    "cta": {
+      "available": "Available for projects",
+      "schedule": "Schedule a 15-min call",
+      "download": "Download my updated CV"
+    }
+  },
+  "seo": {
+    "title": "Pablo Matute · Full-Stack Developer",
+    "description": "Full-Stack developer specialized in Spring Boot and React/Next.js. Portfolio, experience, and projects.",
+    "ogDescription": "Spring Boot · React/Next.js · SQL"
+  },
+  "themes": {
+    "dark": "Dark",
+    "neon": "Neon",
+    "pixel": "Pixel"
+  }
+}

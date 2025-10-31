@@ -1,4 +1,4 @@
-﻿// src/theme/backgrounds.ts
+// src/theme/backgrounds.ts
 import type { CSSProperties } from 'react';
 
 /**

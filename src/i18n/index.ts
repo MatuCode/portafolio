@@ -1,4 +1,15 @@
-// src/i18n/index.ts
+import es from './es.json';
+import en from './en.json';
 
-export { default as i18n } from './client';
-export { useTranslation } from 'react-i18next';
+export const dictionaries = {
+  es,
+  en,
+} as const;
+
+export type Locale = keyof typeof dictionaries;
+
+export function getDictionary(locale?: string) {
+  if (!locale) return dictionaries.es;
+  const key = locale.split('-')[0] as Locale;
+  return dictionaries[key] ?? dictionaries.es;
+}
