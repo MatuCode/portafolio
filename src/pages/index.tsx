@@ -191,11 +191,24 @@ export default function HomePage() {
   const dictionary = getDictionary(locale);
   const tabItems = TAB_ORDER.map((key) => ({ key, label: dictionary.menu[key] }));
 
-  const projectsCopy: ProjectsCopy = dictionary.projects as ProjectsCopy;
+  // Mapear projects con tipos correctos
+  const projectsCopy: ProjectsCopy = {
+    ...dictionary.projects,
+    items: dictionary.projects.items.map((item) => ({
+      ...item,
+      contextType: item.contextType as "academic" | "internship" | "professional" | undefined,
+    })),
+  };
 
   const projectsSEO = useMemo<ProjectSEO[]>(() => {
-    const esProjects = dictionaries.es.projects.items as ProjectsCopy['items'];
-    const enProjects = dictionaries.en.projects.items as ProjectsCopy['items'];
+    const esProjects = dictionaries.es.projects.items.map((item) => ({
+      ...item,
+      contextType: item.contextType as "academic" | "internship" | "professional" | undefined,
+    }));
+    const enProjects = dictionaries.en.projects.items.map((item) => ({
+      ...item,
+      contextType: item.contextType as "academic" | "internship" | "professional" | undefined,
+    }));
     const enMap = new Map(enProjects.map((item) => [item.slug, item]));
 
     return esProjects.map((item) => {
