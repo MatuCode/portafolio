@@ -47,7 +47,14 @@ export default function SeoHead({
       "Backend Development",
       "Frontend Development",
       "Software Engineering",
+      "Web Development",
+      "MatuCode",
     ],
+    brand: {
+      "@type": "Brand",
+      name: "MatuCode",
+      alternateName: "matucode.lat",
+    },
     alumniOf: {
       "@type": "EducationalOrganization",
       name: "UTPL - Universidad Técnica Particular de Loja",
@@ -67,14 +74,22 @@ export default function SeoHead({
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Pablo Matute - Portfolio",
+    name: "Pablo Matute - Portfolio | MatuCode",
     url: normalizedCanonical,
     description: seo.description,
     inLanguage: ["es", "en"],
-    alternateName: "MatuCode Portfolio",
+    alternateName: ["MatuCode Portfolio", "MatuCode", "matucode.lat"],
     publisher: {
       "@type": "Person",
       name: "Pablo Andrés Matute",
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${normalizedCanonical}?search={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
     },
   };
 
@@ -108,7 +123,7 @@ export default function SeoHead({
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />
         <meta name="author" content="Pablo Andrés Matute" />
-        <meta name="keywords" content="desarrollador full-stack, spring boot, react, next.js, java, typescript, portfolio, desarrollador backend, desarrollador frontend, ingeniero telecomunicaciones, ecuador, desarrollo web, api rest, mysql, docker, vercel, pablo matute, matucode, desarrollador ecuador, freelance developer, software engineer" />
+        <meta name="keywords" content="matucode, matucode.lat, pablo matute, desarrollador full-stack, spring boot, react, next.js, java, typescript, portfolio, desarrollador backend, desarrollador frontend, ingeniero telecomunicaciones, ecuador, desarrollo web, api rest, mysql, docker, vercel, desarrollador ecuador, freelance developer, software engineer, matu code, matu code lat" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
