@@ -517,7 +517,7 @@ export default function Certifications() {
           {/* Search Input */}
           <div className="mb-6 relative group">
             <svg
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/50 group-focus-within:text-white/80 transition-colors"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/50 group-focus-within:text-white/90 transition-colors z-10 pointer-events-none"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -529,7 +529,7 @@ export default function Certifications() {
               placeholder={isES ? "Buscar certificaciones por título, emisor o tecnología..." : "Search certifications by title, issuer or technology..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-12 pr-10 rounded-2xl bg-white/10 backdrop-blur-sm text-white placeholder-white/50 ring-1 ring-white/20 focus:ring-2 focus:ring-white/40 focus:outline-none transition-all duration-300 hover:bg-white/12"
+              className="w-full px-4 py-3 pl-12 pr-10 rounded-2xl bg-white/10 backdrop-blur-sm text-white placeholder-white/50 ring-1 ring-white/20 focus:ring-2 focus:ring-white/40 focus:outline-none focus:bg-white/12 transition-all duration-300 hover:bg-white/12"
             />
             {searchTerm && (
               <button
