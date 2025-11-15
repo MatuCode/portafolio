@@ -16,7 +16,7 @@ export default function SeoHead({
   const normalizedCanonical = canonical.replace(/\/+$/, "");
   const canonicalEs = `${normalizedCanonical}/`;
   const canonicalEn = `${normalizedCanonical}/en`;
-  const ogImage = `${normalizedCanonical}/og-image.png`;
+  const ogImage = `${normalizedCanonical}/og-image.jpeg`;
 
   const jsonLd = {
     "@context": "https://schema.org",
